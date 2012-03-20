@@ -103,13 +103,13 @@ class Form extends Element{
 	
 	/**
 	 * Prints the XML for the form. Has alias __toString().
-	 * @param string $breakBetweenFields (Optional) newline character to print between fields default: "<br />\t"
+	 * @param string $breakChar (Optional) newline character to print between fields default: "<br />\n"
 	 * @return string A string representation of this form. ie. The HTML
 	 */
-	public function render($breakBetweenFields=true){
+	public function render($breakChar="<br />\n"){
 		$inner = "\n";
 		foreach($this->fields as $key => $field){
-			$inner .= "\t" . $field->render() . "\n";
+			$inner .= "\t" . $field->render() . $breakChar;
 		}
 		$this->setInnerHTML($inner);
 		return parent::render();
