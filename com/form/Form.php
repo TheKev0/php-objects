@@ -2,6 +2,8 @@
 /**
  * This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.
  * @package com.form
+ * @todo make it accessible like an associative array
+ * @todo make iterable
  */
 class Form extends Element{
 	

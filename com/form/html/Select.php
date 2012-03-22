@@ -1,193 +1,124 @@
 <?php
 /**
- * This file contains two class definitions: Select and Option. The option object represents an option in a select field.
- */
-
-/**
  * Encapsulates an HTML select field.
+ * @package com.form.html
+ * @todo clearOptions() function
+ * @todo clearOption() function
+ * @todo options():Element[] function
+ * @todo setUnselected function
+ * @todo clearSelected function
  */
 class Select extends AbstractInput{	
 
-	private $selected;
+	/**
+	 * Array of indexes of selected options in options array.
+	 */
+	private $selected = array();
+	
+	/**
+	 * Array of option objects.
+	 */
 	private $options = array();
 	
 	/**
-	 * Constructor: Create an instance of a Radio button object.
-	 * @see Option
-	 * @param string $name The name of the radio button input (_POST key)
-	 * @param array $options An array of Option objects for this select field
-	 * @param mixed $selected The index of the selected option from the $options parameter, or an array of indexes of the selected options from the $options parameter.
-	 * @param string $label Optional: The HTML label of the input field
-	 * @param array $validate_function Optional: An array of callback functions that should be called to validate the value variable
-	 * @param array|string $attributes Optional: An associative array of html attributes or a string of attributes for the input tag
+	 * Constructor: Create an instance of a select form input field.
+ 	 * @param string $labelString The label of the input field. Appears in <label> tags.
+	 * @param Option[]|array $option An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option.
+	 * @param string $name (Optional) The name attribute of the input field. Defaults to same as label.
+	 * @param string $id (Optional) The id attribute of the input field. Defaults to same as label.
 	 */
-	function __construct($name, $options, $selected, $label=null, $validate_function=array(), $attributes=array()){
-		$this->name = $name;
-		$this->options = $options;
-		$this->selected = $selected;
-		if(is_array($selected)){
-			foreach($selected as $selected_option){		//setting selected options
-				$options[$selected_option]->setSelected(true);
-			}
-		}
-		else if(isset($options[$selected])){
-			$options[$selected]->setSelected(true);
-		}
-		parent::__construct($label, $validate_function, $attributes);
-		if(!is_array($selected)){
-			$this->value = $selected;
-		}
+	public function __construct($labelString, $options, $name=null, $id=null){
+		$this->setIsInline(false);
+		$this->setTagName("select");
+		$this->setOptions($options);
+		parent::__construct($labelString, "", $name, $id);
 	}
 	
 	/**
-	 * @return array Array of default selected options
+	 * Get selected option(s).
+	 * @return string|boolean|array selected option(s). array of strings of selected options, or false if nothing is selected. 
+	 * @example 
 	 */
 	public function getSelected(){
-		return $this->selected;
+		if(count($selected) == 0){
+			return false;
+		}elseif(count($selected) == 1){
+			return $selected[0];
+		}else{
+			$options = array();
+			foreach($this->selected as $key){
+				$options[] = $this->options[$key];
+			}
+			return $options;
+		}
 	}
 	
 	/**
-	 * Set the default selected options
-	 * @param array $selected The selected options as an array of indexes of the options paramater
+	 * Set the default selected option(s). Calling this function clears all previously set selected entries.
+	 * @param array|string $selected The selected option(s) or an array of selected options.
+	 * @return string|boolean|array previously selected option(s). array of strings of selected options, or false if nothing is selected. Identical to value returned by getSelected() just before the call to this method.
 	 */
 	public function setSelected($selected){
-		$this->selected = $selected;
-		
-		//unselect everything else
-		foreach($this->options as $option){
-			$option->setSelected(false);
+		$previous = $this->getSelected();
+		$this->selected = array_splice($this->selected, 0);
+
+		if(is_string($selected)){
+			$this->selected[] = $selected;
+		}elseif(is_array($selected)){
+			$this->selected = $selected;
 		}
 		
-		if(is_array($selected)){
-			foreach($selected as $selected_option){		//setting selected options
-				if($this->options[$selected_option] != null){
-					$this->options[$selected_option]->setSelected(true);
-				}
-			}
-		}
-		else if($this->options[$selected] != null){
-			$this->options[$selected]->setSelected(true);
-		}
+		return $previous;
 	}
 	
 	/**
-	 * @return array Array of Option objects for this select field
+	 * Get the Element object encapsulating the option
+	 * @param string $display the human readable string the option displays or a key defined by the associative array passed to setOptions or the constructor.
+	 * @return array Associative array of options in this select field with the keys as the value attributes.
 	 */
-	public function getOptions(){
-		return $this->options;
+	public function getOptionElement($option){
+		return $this->options[$option];
 	}
 	
 	/**
-	 * Set the options for this select field
-	 * @param array $options An array of Option objects to be used as the options for this select field
+	 * Set the options for this select field. Options are added to ones already present.
+	 * @param array $options An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option.
 	 */
 	public function setOptions($options){
-		$this->options = $options;
+		if(is_array($options)){
+			foreach($options as $key => $optionText){
+				$opt = new Element("option");
+				$display = (is_numeric($key)) ? $optionText : $key;
+				$opt->setAttribute("value", $display);
+				$opt->setInnerHTML($optionText);
+				$this->options[] = $opt;
+			}
+		}
 	}
 	
 	/**
-	 * Returns the HTML for this input object.
-	 * @see __toString()
+	 * Adds an option to the select field.
+	 * @param string $label displayed to user in select field
+	 * @param string $value (Optional) value attribute of option tag
 	 */
-	public function toHTML(){
-		$html = '<select name= "'.$this->name.'" id= "'.$this->id.'" ';
-		if(count($this->selected) > 1){
-			$html .= " multiple= \"true\"";
-		}
-		if(is_array($this->attributes)){
-			$html .= " " . $this->arrayToAttributesString($this->attributes) . " ";
-		}
-		else{
-			$html .= " " . $this->attributes . " ";
-		}
-		$html .= ">" . "\n";
-		
-		foreach($this->options as $option){	//add options
-			$html .= $option->toHTML();
-		}
-		$html .= '</select>';
-		return $html . "\n";
-	}
-	
-}
-
-/**
- * This class encapsulates one option in a Select drop-down. It is meant to be used by instances of Select.
- */
-class Option extends AbstractInput{
-	
-	/**
-	 * String to be used for the option. IE. the 'innerHTML' of an <option> tag. ex: <option>"display"</option>
-	 */
-	private $display;
-	
-	/**
-	 * boolean value indicating that this option should be selected by default. <option selected= "selected"></option>
-	 */
-	private $isSelected;
-	
-	/**
-	 * Construct an Option object.
-	 * @param string $val The value attribute of the option tag
-	 * @param string $display Optional: the 'innerHTML' of the option tag (<option>$display</option>). Defaults to same as value if not provided.
-	 * @param boolean $isSelected Optional: boolean indicating if this option should be selected by default. (true: <option selected= "selected"></option>)
-	*/
-	function __construct($val, $display='', $isSelected=false){
-		if($display == ''){
-			$display = $val;
-		}
-		$this->value = $val;
-		$this->display = $display;
-		$this->isSelected = $isSelected;
+	public function addOption($label, $value=""){
+		$option = new Element("option");
+		$option->setAttribute("value", $value);
+		$option->setInnerHTML($label);
+		$this->options[] = $option;
 	}
 	
 	/**
-	 * @return string 'innerHTML' of option tag.
+	 * Prints the markup for this input. Has alias __toString()
+	 * @return string A string representation of this input. ie. The XML
 	 */
-	public function getDisplay(){
-		return $this->display;
-	}
-	
-	/**
-	 * Set the "innerHTML" of the option tag.
-	 * @param string String representing display of option tag
-	 */
-	public function setDisplay($disp){
-		$this->display = $disp;
-	}
-	
-	/**
-	 * Set the option as selected or not selected.
-	 * @param boolean If true Option is selected, false otherwise.
-	 */
-	public function setSelected($sel){
-		$this->isSelected = $sel;
-	}
-	
-	/**
-	 * @return boolean true if option is selected, false otherwise.
-	 */
-	public function isSelected(){
-		return $this->isSelected;
-	}
-	
-	/**
-	 * Returns the HTML for the option in its current state.
-	 * Has alias @see __toString()
-	 */
-	public function toHTML(){
-		$html = '<option value= "'.$this->value.'" ';
-		if($this->isSelected === true){
-			$html .= 'selected= "selected"';
+	public function render(){
+		$this->clearAttribute("value");
+		$inner = "\n";
+		foreach($this->options as $option){
+			$inner .= "\t" . $option->render() . "\n";
 		}
-		if(is_array($this->attributes)){
-			$html .= " " . $this->arrayToAttributesString($this->attributes) . " ";
-		}
-		else{
-			$html .= " " . $this->attributes . " ";
-		}
-		$html .= '>' . $this->display . '</option>' . "\n";
-		return $html;
+		$this->setInnerHTML($inner);
+		return parent::render();
 	}
 }
-?>

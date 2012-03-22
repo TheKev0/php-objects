@@ -4,7 +4,8 @@
  * @package com
  * @todo store child elements (?, maybe)
  * @todo add dom navigation functions: add/remove Child, children, count, xpath (see SimpleXMLElement), implement Traversable
- * @todo customizeable settings for (tag names all caps, )
+ * @todo customizeable settings for markup (tag names all caps, )
+ * @todo add static method to generate Element from SimpleXMLElement
  */
 class Element{
 	
@@ -61,9 +62,13 @@ class Element{
 	/**
 	 * Set the id attribute of this Element.
 	 * @param string $id id attribute of Element
+	 * @return the old id
 	 */
 	public function setID($id){
+		$previous = $this->getID();
 		$this->id = $id;
+		$this->setAttribute("id", $id);
+		return $previous;
 	}
 	
 	/**

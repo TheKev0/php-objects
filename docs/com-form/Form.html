@@ -1,0 +1,672 @@
+<html>
+<head>
+<title>Docs For Class Form</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">com-form</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                        
+                                                  		  [ <a href="../classtrees_com-form.html" class="menu">class tree: com-form</a> ]
+		  [ <a href="../elementindex_com-form.html" class="menu">index: com-form</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
+      <b>Packages:</b><br />
+              <a href="../li_com.html">com</a><br />
+              <a href="../li_com-form.html">com-form</a><br />
+              <a href="../li_com-form-html.html">com-form-html</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../com-form/_form---AbstractInput.php.html">		AbstractInput.php
+		</a><br>
+			<a href="../com-form/_form---Form.php.html">		Form.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../com-form/AbstractInput.html">AbstractInput</a><br />
+	    		<a href="../com-form/Form.html">Form</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Form</h1>
+Source Location: /form/Form.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../com/Element.html">Element</a>
+   |
+   --Form</pre><br />
+<div class="description">This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+              </ul>
+
+
+
+
+        
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../com-form/Form.html#var$action">$action</a></li>
+    <li><a href="../com-form/Form.html#var$fields">$fields</a></li>
+    <li><a href="../com-form/Form.html#var$hasReadValues">$hasReadValues</a></li>
+    <li><a href="../com-form/Form.html#var$method">$method</a></li>
+    <li><a href="../com-form/Form.html#var$submittedValues">$submittedValues</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../com-form/Form.html#method__construct">__construct</a></li>
+    <li><a href="../com-form/Form.html#methodaddField">addField</a></li>
+    <li><a href="../com-form/Form.html#methodfieldExists">fieldExists</a></li>
+    <li><a href="../com-form/Form.html#methodgetField">getField</a></li>
+    <li><a href="../com-form/Form.html#methodremoveField">removeField</a></li>
+    <li><a href="../com-form/Form.html#methodrender">render</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../com/Element.html">Element</a></h4>
+<dl>
+<dt>
+  <a href="../com/Element.html#var$attributes">Element::$attributes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../com/Element.html#var$id">Element::$id</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../com/Element.html#var$innerHTML">Element::$innerHTML</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../com/Element.html#var$isInline">Element::$isInline</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../com/Element.html#var$tagName">Element::$tagName</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../com/Element.html">Element</a></h4>
+<dl>
+    <dt>
+    <a href="../com/Element.html#method__construct">Element::__construct()</a>
+  </dt>
+  <dd>
+    Construct an Element object.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodaddAttribute">Element::addAttribute()</a>
+  </dt>
+  <dd>
+    Adds an attribute to this Element. If given attribute is already defined new value is appended.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodarrayToAttributesString">Element::arrayToAttributesString()</a>
+  </dt>
+  <dd>
+    Turns an associative array into a string to be used as the attributes in an xml tag.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodattributes">Element::attributes()</a>
+  </dt>
+  <dd>
+    Get all attributes of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodclearAttribute">Element::clearAttribute()</a>
+  </dt>
+  <dd>
+    Removes specified attribute of the Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetAttribute">Element::getAttribute()</a>
+  </dt>
+  <dd>
+    Get an attribute of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetID">Element::getID()</a>
+  </dt>
+  <dd>
+    Get the id attribute of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetInnerHTML">Element::getInnerHTML()</a>
+  </dt>
+  <dd>
+    Get the inner HTML of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetIsInline">Element::getIsInline()</a>
+  </dt>
+  <dd>
+    Indicates whether this tag is inline.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetTagName">Element::getTagName()</a>
+  </dt>
+  <dd>
+    Get the tagname of this Element
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodrender">Element::render()</a>
+  </dt>
+  <dd>
+    Prints the XML for this Element. Has alias __toString()
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodsetAttribute">Element::setAttribute()</a>
+  </dt>
+  <dd>
+    Set attribute for this input field, overwriting the old one if it is present.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodsetID">Element::setID()</a>
+  </dt>
+  <dd>
+    Set the id attribute of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodsetInnerHTML">Element::setInnerHTML()</a>
+  </dt>
+  <dd>
+    Set the inner HTML of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodsetIsInline">Element::setIsInline()</a>
+  </dt>
+  <dd>
+    Sets whether this tag is inline.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodsetTagName">Element::setTagName()</a>
+  </dt>
+  <dd>
+    Set the tagName for this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#method__toString">Element::__toString()</a>
+  </dt>
+  <dd>
+    Magic method. Alias of render()
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line <a href="../__filesource/fsource_com-form__formForm.php.html#a8">8</a>]<br />
+This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make it accessible like an associative array</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make iterable</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$action"></a>
+	<p></p>
+	<h4>$action = <span class="value">&nbsp;&quot;&quot;</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a28">28</a>]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$fields"></a>
+	<p></p>
+	<h4>$fields = <span class="value">array()</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a13">13</a>]</p>
+  Stores the input fields as an array of AbstractInput objects.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$hasReadValues"></a>
+	<p></p>
+	<h4>$hasReadValues = <span class="value">&nbsp;false</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a23">23</a>]</p>
+  A state variable to indicate whether the form field values have been read from the SuperGloval arrays. ($_GET, $_POST)<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$method"></a>
+	<p></p>
+	<h4>$method = <span class="value"></span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a33">33</a>]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$submittedValues"></a>
+	<p></p>
+	<h4>$submittedValues = <span class="value">array()</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a18">18</a>]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a41">41</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>Form __construct(
+[string
+$action = null], [string
+$method = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Constructor: Create a form object to store AbstractInput form fields and automatically read submitted values from $_GET. $_POST  WARNING: This class does NOT sanitize any form inputs. The client class must do this.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../com/Element.html#method__construct">Element::__construct()</a> (Construct an Element object.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$action</b>&nbsp;&nbsp;</td>
+        <td>(Optional): The action attribute (target URL) of the form. If not set assumes current path and query string.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$method</b>&nbsp;&nbsp;</td>
+        <td>The HTTP method of the form. If not set, assumes POST. (change this ?)</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodaddField"></a>
+	<h3>method addField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a59">59</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string addField(
+<a href="../com-form/AbstractInput.html">AbstractInput</a>
+$field)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Add a form field to the form. The form uniquely identifies each form field by an index. By default the label is a form field's index. If the label is blank the addField function uses an internally generated value. This function always returns the index it is using so that form fields can be retrieved using getField($index).<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>an index the form instance uses to uniquely identify the form field.</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../com-form/Form.html#methodgetField">Form::getField()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../com-form/AbstractInput.html">AbstractInput</a>&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td>the input field to add</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfieldExists"></a>
+	<h3>method fieldExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a73">73</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean fieldExists(
+string
+$labelString)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Check of a field with label $labelString exists.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true if the field is in this form and false otherwise.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$labelString</b>&nbsp;&nbsp;</td>
+        <td>label to to check. Can also be a value returned by addField()</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetField"></a>
+	<h3>method getField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a84">84</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../com-form/AbstractInput.html">AbstractInput</a>|boolean getField(
+string
+$labelString)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Retrieve a form field using the label string or index returned by addField()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the form field or false if it is not present</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../com-form/Form.html#methodgetField">Form::getField()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$labelString</b>&nbsp;&nbsp;</td>
+        <td>either the label string or index returned by addField()</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodremoveField"></a>
+	<h3>method removeField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a97">97</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../com-form/AbstractInput.html">AbstractInput</a>|boolean removeField(
+string
+$labelString)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Removes a form field using the label string or index returned by addField()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the removed form field or false if it does not exist</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../com-form/Form.html#methodgetField">Form::getField()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$labelString</b>&nbsp;&nbsp;</td>
+        <td>either the label string or index returned by addField()</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender"></a>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a111">111</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string render(
+[string
+$breakChar = &quot;&lt;br /&gt;\n&quot;])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Prints the XML for the form. Has alias __toString().<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>A string representation of this form. ie. The HTML</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../com/Element.html#methodrender">Element::render()</a> (Prints the XML for this Element. Has alias __toString())<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$breakChar</b>&nbsp;&nbsp;</td>
+        <td>(Optional) newline character to print between fields default: &quot;<br />\n&quot;</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Thu, 22 Mar 2012 09:41:28 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

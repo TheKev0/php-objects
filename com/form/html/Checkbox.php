@@ -1,23 +1,22 @@
 <?php
 /**
  * Encapsulates a Checkbox form input field.
- * @package com.form
+ * @package com.form.html
  */
 class Checkbox extends AbstractInput{
 	
 	/**
-	 * A boolean value indicating if this checkbox is checked or not.
+	 * A boolean value indicating if this checkbox is checked by default.
 	 */
-	private $checked;	//if the radio button will be selected by default
+	private $checked;
 	
 	/**
-	 * Constructor: Create an instance of a Checkbox object.
+	 * Constructor: Create an instance of a checkbox form input field.
  	 * @param string $labelString The label of the input field. Appears in <label> tags.
 	 * @param string $value The value attribute of the input field
-	 * @param boolean $checked (Optional) Default state checked/unchecked of checkbox (true = checked)
+	 * @param boolean $checked (Optional) Default checked/unchecked state of checkbox (true = checked). Normally unchecked
 	 * @param string $name (Optional) The name attribute of the input field. Defaults to same as label.
 	 * @param string $id (Optional) The id attribute of the input field. Defaults to same as label.
-
 	 */
 	public function __construct($labelString, $value, $checked=false, $name=null, $id=null){
 		$this->setIsInline(true);
@@ -38,9 +37,12 @@ class Checkbox extends AbstractInput{
 	/**
 	 * Set this checkbox as checked or unchecked.
 	 * @param boolean $checked true to make checkbox checked, false otherwise.
+	 * @return boolean returns the previous state
 	 */
 	public function setChecked($checked){	//paramater checked is a boolean inidcating whether button is checked
+		$previous = $this->isChecked();
 		$this->checked = $checked;
+		return $previous;
 	}
 
 }

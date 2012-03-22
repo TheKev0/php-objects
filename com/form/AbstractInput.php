@@ -1,7 +1,9 @@
 <?php
 /**
  * This is an abstract subclass of Element that encapsulates an HTML or XForm input field. This class does not pertain specifically to HTML, XForms, etc. It is meant to be general and specific types of input fields are defined as children of this object.
- *	@package com.form
+ * @package com.form
+ * @todo append default id of each field with _<field type>
+ * @todo prefix default id and names with something to identify my library
  */
 abstract class AbstractInput extends Element{
 
@@ -28,7 +30,7 @@ abstract class AbstractInput extends Element{
 	/**
 	 * Boolean to control whether or not label tag will be printed.
 	 */
-	protected $printLabel;
+	protected $printLabel = true;
 	
 	/**
 	 * DEPRECATED: Name of validation function to run against value
@@ -49,8 +51,7 @@ abstract class AbstractInput extends Element{
 	 * @param string $id (Optional) The id attribute of the input field. Defaults to same as label.
 	 */
 	public function __construct($labelString, $value, $name=null, $id=null){
-		$this->value = $value;
-		$this->printLabel = true;
+		$this->setValue($value);
 		if(empty($labelString)){
 			$this->name = ($name == null) ? AbstractInput::$identifier : ($name);
 			$this->id = ($id == null) ? AbstractInput::$identifier : $id;
@@ -58,8 +59,8 @@ abstract class AbstractInput extends Element{
 			$this->name = ($name == null) ? $labelString : ($name);
 			$this->id = ($id == null) ? $labelString : $id;
 		}
-		$this->setAttribute("name", $this->name);
-		$this->label = new Element("label", $labelString, "", array("for" => $this->name));
+		$this->setName($this->name);
+		$this->setLabelElement(new Element("label", $labelString, "", array("for" => $this->name)));
 		AbstractInput::$identifier++;
 	}
 	
@@ -74,9 +75,13 @@ abstract class AbstractInput extends Element{
 	/**
 	 * Set the name attribute for this input field.
 	 * @param string $name name attribute
+	 * @return string the old name
 	 */
 	public function setName($name){
+		$previous = $this->getName();
 		$this->name = $name;
+		$this->setAttribute("name", $name);
+		return $previous;
 	}
 	
 	/**
@@ -128,9 +133,12 @@ abstract class AbstractInput extends Element{
 	/**
 	 * Set the label tag to be included or excluded in the call to render()
 	 * @param boolean $label true to print label, false otherwise
+	 * @return boolean return previous value
 	 */
 	public function setPrintLabel($printLabel){
-		$this->printLabel = $includeLabel;
+		$previous = $this->getPrintLabel();
+		$this->printLabel = $printLabel;
+		return $previous;
 	}
 	
 	/**
@@ -144,9 +152,13 @@ abstract class AbstractInput extends Element{
 	/**
 	 * Set the value attribute for this input field.
 	 * @param string $val value attribute
+	 * @return string the old value
 	 */
 	public function setValue($val){
+		$previous = $this->getValue();
 		$this->value = $val;
+		$this->setAttribute("value", $val);
+		return $previous;
 	}
 	
 	/**

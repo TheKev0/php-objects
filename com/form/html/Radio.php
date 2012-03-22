@@ -1,64 +1,48 @@
 <?php
 /**
  * Encapsulates a Radio buttom form input field.
- * @package Form
+ * @package com.form.html
  */
 class Radio extends AbstractInput{
 	
 	/**
-	 * boolean Indicates whether this radio button is selected by default.
+	 * A boolean value indicating if this radio button is checked by default.
 	 */
 	private $checked;
 	
 	/**
-	 * Constructor: Create an instance of a Radio button object.
-	 * @param string $name The name of the radio button input (_POST key)
-	 * @param string $val The value to submit when radio button is checked. (_Post value)
-	 * @param boolean $checked Default state of radio button (true = checked)
-	 * @param string $label Optional: The HTML label of the input field
-	 * @param array $validate_function Optional: An array of callback functions that should be called to validate the value variable
-	 * @param array|string $attributes Optional: An associative array of html attributes or a string of attributes for the input tag
+	 * Constructor: Create an instance of a radio button form input field.
+ 	 * @param string $labelString The label of the input field. Appears in <label> tags.
+	 * @param string $value The value attribute of the input field
+	 * @param boolean $checked (Optional) Default checked/unchecked state of checkbox (true = checked). Normally unchecked
+	 * @param string $name (Optional) The name attribute of the input field. Defaults to same as label.
+	 * @param string $id (Optional) The id attribute of the input field. Defaults to same as label.
 	 */
-	function __construct($name, $val, $checked, $label=null, $validate_function=array(), $attributes=array()){
-		$this->value = $val;
-		$this->name = $name;
+	public function __construct($labelString, $value, $checked=false, $name=null, $id=null){
+		$this->setIsInline(true);
+		$this->setTagName("input");
+		$this->setAttribute("type", "radio");
 		$this->checked = $checked;
-		parent::__construct($label, $validate_function, $attributes);
+		parent::__construct($labelString, $value, $name, $id);
 	}
 	
 	/**
-	 * Check if this radio button instance is selcted off by default.
-	 * @return boolean true if this radio button is selected, false otherwise.
+	 * Check if this checkbox instance is checked off by default.
+	 * @return boolean true if this checkbox is checked, false otherwise.
 	 */
 	public function isChecked(){
 		return $this->checked;
 	}
 	
 	/**
-	 * Set this radio button as checked or unchecked.
-	 * @param boolean $checked true to make radio button selected, false otherwise. NOTE: Making this radio button selected does NOT automatically deselect other radio buttons. This MUST be handled externally.
+	 * Set this checkbox as checked or unchecked.
+	 * @param boolean $checked true to make checkbox checked, false otherwise.
+	 * @return boolean returns the previous state
 	 */
-	public function setChecked($checked){
+	public function setChecked($checked){	//paramater checked is a boolean inidcating whether button is checked
+		$previous = $this->isChecked();
 		$this->checked = $checked;
-	}
-	
-	/**
-	 * Returns the HTML for this input object.
-	 * @see __toString()
-	 */
-	public function toHTML(){
-		$html = '<input type= "radio" name= "'.$this->name.'" value= "'.$this->value.'" id= "'.$this->id.'" ';
-		if($this->checked === true){
-			$html .= 'checked= "checked" ';
-		}
-		if(is_array($this->attributes)){
-			$html .= " " . $this->arrayToAttributesString($this->attributes) . " ";
-		}
-		else{
-			$html .= " " . $this->attributes . " ";
-		}
-		$html .= '/>';
-		return $html . "\n";
+		return $previous;
 	}
 
 }
