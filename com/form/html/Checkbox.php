@@ -44,6 +44,19 @@ class Checkbox extends AbstractInput{
 		$this->checked = $checked;
 		return $previous;
 	}
+	
+	/**
+	 * Prints the markup for this input. Has alias __toString()
+	 * @return string A string representation of this input. ie. The XML
+	 */
+	public function render(){
+		if($this->checked){
+			$this->setAttribute("checked", "checked");
+		}
+		$input = parent::render();
+//		$label = ($this->getPrintLabel() == true) ? $this->getLabelElement() : "";
+		return $input;
+	}
 
 }
 ?>

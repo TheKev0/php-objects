@@ -43,6 +43,7 @@
 	[ <a href="elementindex.html#g">g</a> ]
 	[ <a href="elementindex.html#h">h</a> ]
 	[ <a href="elementindex.html#i">i</a> ]
+	[ <a href="elementindex.html#k">k</a> ]
 	[ <a href="elementindex.html#l">l</a> ]
 	[ <a href="elementindex.html#m">m</a> ]
 	[ <a href="elementindex.html#n">n</a> ]
@@ -67,7 +68,7 @@
 							<dt><b>addAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodaddAttribute">Element::addAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an attribute to this Element. If given attribute is already defined new value is appended.</dd>
 							<dt><b>addField</b></dt>
-				<dd>in file Form.php, method <a href="com-form/Form.html#methodaddField">Form::addField()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add a form field to the form. The form uniquely identifies each form field by an index. By default the label is a form field's index. If the label is blank the addField function uses an internally generated value. This function always returns the index it is using so that form fields can be retrieved using getField($index).</dd>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodaddField">Form::addField()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used.</dd>
 							<dt><b>addOption</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodaddOption">Select::addOption()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an option to the select field.</dd>
 							<dt><b>arrayToAttributesString</b></dt>
@@ -90,6 +91,8 @@
 				<dd>in file Element.php, method <a href="com/Element.html#methodclearAttribute">Element::clearAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Removes specified attribute of the Element.</dd>
 							<dt><b>com.inc.php</b></dt>
 				<dd>procedural page <a href="com/_com.inc.php.html">com.inc.php</a></dd>
+							<dt><b>current</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodcurrent">Form::current()</a></dd>
 							<dt><b>Checkbox.php</b></dt>
 				<dd>procedural page <a href="com-form-html/_form---html---Checkbox.php.html">Checkbox.php</a></dd>
 					</dl>
@@ -146,14 +149,20 @@
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodgetLabelElement">AbstractInput::getLabelElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the label Element of this input field.</dd>
 							<dt><b>getLabelString</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodgetLabelString">AbstractInput::getLabelString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the label string of this input field.</dd>
+							<dt><b>getMethod</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodgetMethod">Form::getMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the HTTP method used by this form.</dd>
 							<dt><b>getName</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodgetName">AbstractInput::getName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the name attribute of this input field.</dd>
 							<dt><b>getOptionElement</b></dt>
-				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetOptionElement">Select::getOptionElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the Element object encapsulating the option</dd>
+				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetOptionElement">Select::getOptionElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get an option element by the value attribute. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string.</dd>
+							<dt><b>getPrintFields</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodgetPrintFields">Form::getPrintFields()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if the form is set to print it's input fields with a call to render()</dd>
 							<dt><b>getPrintLabel</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodgetPrintLabel">AbstractInput::getPrintLabel()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if the label tag is going to be included in the call to render()</dd>
 							<dt><b>getSelected</b></dt>
-				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetSelected">Select::getSelected()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get selected option(s).</dd>
+				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetSelected">Select::getSelected()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get selected option(s) values. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string. The string(s) returned by this method can be used in getOptionElement($value) to retrieve the option Element.</dd>
+							<dt><b>getSubmittedValues</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodgetSubmittedValues">Form::getSubmittedValues()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the data filled out in the form field. This method returns false if the form  was not submitted. (ie. submitted() returns false.)  An associative array of the submitted values is returned with the same keys used with getField(), with the exception of Radio buttons.</dd>
 							<dt><b>getTagName</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodgetTagName">Element::getTagName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the tagname of this Element</dd>
 							<dt><b>getValue</b></dt>
@@ -166,8 +175,6 @@
 	<div>
 		<h2>h</h2>
 		<dl>
-							<dt><b>$hasReadValues</b></dt>
-				<dd>in file Form.php, variable <a href="com-form/Form.html#var$hasReadValues">Form::$hasReadValues</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A state variable to indicate whether the form field values have been read from the SuperGloval arrays. ($_GET, $_POST)</dd>
 							<dt><b>Hidden.php</b></dt>
 				<dd>procedural page <a href="com-form-html/_form---html---Hidden.php.html">Hidden.php</a></dd>
 							<dt><b>Hidden</b></dt>
@@ -198,12 +205,24 @@
 	</div>
 	<a href="elementindex.html#top">top</a><br>
   <hr />
+	<a name="k"></a>
+	<div>
+		<h2>k</h2>
+		<dl>
+							<dt><b>key</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodkey">Form::key()</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex.html#top">top</a><br>
+  <hr />
 	<a name="l"></a>
 	<div>
 		<h2>l</h2>
 		<dl>
 							<dt><b>$label</b></dt>
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$label">AbstractInput::$label</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Holds the label of the input field.</dd>
+							<dt><b>loadSubmittedValues</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodloadSubmittedValues">Form::loadSubmittedValues()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Load sumbitted values into the form field. This method returns false if the form  was not submitted.</dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -213,7 +232,7 @@
 		<h2>m</h2>
 		<dl>
 							<dt><b>$method</b></dt>
-				<dd>in file Form.php, variable <a href="com-form/Form.html#var$method">Form::$method</a></dd>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$method">Form::$method</a><br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP method used by the form. Defaults to POST</dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -224,6 +243,8 @@
 		<dl>
 							<dt><b>$name</b></dt>
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$name">AbstractInput::$name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name attribute of the input field.</dd>
+							<dt><b>next</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodnext">Form::next()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -232,6 +253,10 @@
 	<div>
 		<h2>p</h2>
 		<dl>
+							<dt><b>$position</b></dt>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$position">Form::$position</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Current position used to implement functions for the Iterator interface.</dd>
+							<dt><b>$printFields</b></dt>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$printFields">Form::$printFields</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Boolean variable to determine whether fields should be printed with a call to render()</dd>
 							<dt><b>$printLabel</b></dt>
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$printLabel">AbstractInput::$printLabel</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Boolean to control whether or not label tag will be printed.</dd>
 					</dl>
@@ -253,15 +278,19 @@
 							<dt><b>render</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodrender">Element::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the XML for this Element. Has alias __toString()</dd>
 							<dt><b>render</b></dt>
-				<dd>in file Form.php, method <a href="com-form/Form.html#methodrender">Form::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the XML for the form. Has alias __toString().</dd>
-							<dt><b>render</b></dt>
-				<dd>in file TextArea.php, method <a href="com-form-html/TextArea.html#methodrender">TextArea::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
-							<dt><b>render</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodrender">AbstractInput::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
 							<dt><b>render</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodrender">Select::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
+							<dt><b>render</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodrender">Form::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the XML for the form. Has alias __toString().</dd>
+							<dt><b>render</b></dt>
+				<dd>in file Checkbox.php, method <a href="com-form-html/Checkbox.html#methodrender">Checkbox::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
+							<dt><b>render</b></dt>
+				<dd>in file TextArea.php, method <a href="com-form-html/TextArea.html#methodrender">TextArea::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
 							<dt><b>Reset</b></dt>
 				<dd>in file Reset.php, class <a href="com-form-html/Reset.html">Reset</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates a reset button for a form.</dd>
+							<dt><b>rewind</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodrewind">Form::rewind()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -270,6 +299,8 @@
 	<div>
 		<h2>s</h2>
 		<dl>
+							<dt><b>$submitted</b></dt>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$submitted">Form::$submitted</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A state variable to indicate whether the form has been submitted.</dd>
 							<dt><b>$submittedValues</b></dt>
 				<dd>in file Form.php, variable <a href="com-form/Form.html#var$submittedValues">Form::$submittedValues</a></dd>
 							<dt><b>Select.php</b></dt>
@@ -294,10 +325,14 @@
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetLabelElement">AbstractInput::setLabelElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the label Element for this input field.</dd>
 							<dt><b>setLabelString</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetLabelString">AbstractInput::setLabelString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the label string for this input field.</dd>
+							<dt><b>setMethod</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodsetMethod">Form::setMethod()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the HTTP method used by this form.</dd>
 							<dt><b>setName</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetName">AbstractInput::setName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the name attribute for this input field.</dd>
 							<dt><b>setOptions</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodsetOptions">Select::setOptions()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the options for this select field. Options are added to ones already present.</dd>
+							<dt><b>setPrintFields</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodsetPrintFields">Form::setPrintFields()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set whether or not the form will print input fields.</dd>
 							<dt><b>setPrintLabel</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetPrintLabel">AbstractInput::setPrintLabel()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the label tag to be included or excluded in the call to render()</dd>
 							<dt><b>setSelected</b></dt>
@@ -308,6 +343,8 @@
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetValue">AbstractInput::setValue()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the value attribute for this input field.</dd>
 							<dt><b>Submit</b></dt>
 				<dd>in file Submit.php, class <a href="com-form-html/Submit.html">Submit</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates a submit button in a form.</dd>
+							<dt><b>submitted</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodsubmitted">Form::submitted()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if this form was submitted. This method checks the appropriate  superglobal array $_GET|$_POST to see if the key for the key of the submit button  is present. This method will not work if the form has no submit button.</dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -338,6 +375,8 @@
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$validation_function">AbstractInput::$validation_function</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DEPRECATED: Name of validation function to run against value</dd>
 							<dt><b>$value</b></dt>
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$value">AbstractInput::$value</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Value attributes of the input field.</dd>
+							<dt><b>valid</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodvalid">Form::valid()</a></dd>
 							<dt><b>validate</b></dt>
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodvalidate">AbstractInput::validate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DEPRECATED: Validates the value of an input field using a provided callback function. An arbitrary number of arguments can be passed to the callback function. The callback function's first parameter must be the value being validated because this function provides the value of the field as the first parameter automatically.</dd>
 					</dl>
@@ -379,7 +418,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 22 Mar 2012 09:41:26 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 23 Mar 2012 14:26:47 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

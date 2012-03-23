@@ -65,13 +65,18 @@ Source Location: /form/Form.php<br /><br />
 <div class="description">This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-              </ul>
+                                      </ul>
 
 
 
 
-        
+                        
 
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li>Iterator (internal interface)</li>            </ul>
+        </p>
         
 </td>
 
@@ -80,8 +85,10 @@ Source Location: /form/Form.php<br /><br />
 <ul>
     <li><a href="../com-form/Form.html#var$action">$action</a></li>
     <li><a href="../com-form/Form.html#var$fields">$fields</a></li>
-    <li><a href="../com-form/Form.html#var$hasReadValues">$hasReadValues</a></li>
     <li><a href="../com-form/Form.html#var$method">$method</a></li>
+    <li><a href="../com-form/Form.html#var$position">$position</a></li>
+    <li><a href="../com-form/Form.html#var$printFields">$printFields</a></li>
+    <li><a href="../com-form/Form.html#var$submitted">$submitted</a></li>
     <li><a href="../com-form/Form.html#var$submittedValues">$submittedValues</a></li>
   </ul>
 </td>
@@ -92,10 +99,22 @@ Source Location: /form/Form.php<br /><br />
 <ul>
     <li><a href="../com-form/Form.html#method__construct">__construct</a></li>
     <li><a href="../com-form/Form.html#methodaddField">addField</a></li>
+    <li><a href="../com-form/Form.html#methodcurrent">current</a></li>
     <li><a href="../com-form/Form.html#methodfieldExists">fieldExists</a></li>
     <li><a href="../com-form/Form.html#methodgetField">getField</a></li>
+    <li><a href="../com-form/Form.html#methodgetMethod">getMethod</a></li>
+    <li><a href="../com-form/Form.html#methodgetPrintFields">getPrintFields</a></li>
+    <li><a href="../com-form/Form.html#methodgetSubmittedValues">getSubmittedValues</a></li>
+    <li><a href="../com-form/Form.html#methodkey">key</a></li>
+    <li><a href="../com-form/Form.html#methodloadSubmittedValues">loadSubmittedValues</a></li>
+    <li><a href="../com-form/Form.html#methodnext">next</a></li>
     <li><a href="../com-form/Form.html#methodremoveField">removeField</a></li>
     <li><a href="../com-form/Form.html#methodrender">render</a></li>
+    <li><a href="../com-form/Form.html#methodrewind">rewind</a></li>
+    <li><a href="../com-form/Form.html#methodsetMethod">setMethod</a></li>
+    <li><a href="../com-form/Form.html#methodsetPrintFields">setPrintFields</a></li>
+    <li><a href="../com-form/Form.html#methodsubmitted">submitted</a></li>
+    <li><a href="../com-form/Form.html#methodvalid">valid</a></li>
   </ul>
 </td>
 
@@ -263,16 +282,28 @@ Source Location: /form/Form.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line <a href="../__filesource/fsource_com-form__formForm.php.html#a8">8</a>]<br />
+[line <a href="../__filesource/fsource_com-form__formForm.php.html#a12">12</a>]<br />
 This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make it accessible like an associative array</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>implement ArrayAccess</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make iterable</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>if no submit button, add a hidden input field to act as a submit.</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make POST and GET class constants</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for enctype</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for fieldsets</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for default tab indexing</td>
   </tr>
 </table>
 </div>
@@ -286,7 +317,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$action"></a>
 	<p></p>
 	<h4>$action = <span class="value">&nbsp;&quot;&quot;</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a28">28</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a32">32</a>]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -310,32 +341,8 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$fields"></a>
 	<p></p>
 	<h4>$fields = <span class="value">array()</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a13">13</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a17">17</a>]</p>
   Stores the input fields as an array of AbstractInput objects.<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>mixed</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$hasReadValues"></a>
-	<p></p>
-	<h4>$hasReadValues = <span class="value">&nbsp;false</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a23">23</a>]</p>
-  A state variable to indicate whether the form field values have been read from the SuperGloval arrays. ($_GET, $_POST)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -358,8 +365,80 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$method"></a>
 	<p></p>
 	<h4>$method = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a33">33</a>]</p>
-  <br /><br />
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a37">37</a>]</p>
+  HTTP method used by the form. Defaults to POST<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$position"></a>
+	<p></p>
+	<h4>$position = <span class="value">&nbsp;0</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a47">47</a>]</p>
+  Current position used to implement functions for the Iterator interface.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$printFields"></a>
+	<p></p>
+	<h4>$printFields = <span class="value">&nbsp;true</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a42">42</a>]</p>
+  Boolean variable to determine whether fields should be printed with a call to render()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$submitted"></a>
+	<p></p>
+	<h4>$submitted = <span class="value">&nbsp;null</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a22">22</a>]</p>
+  A state variable to indicate whether the form has been submitted.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -382,7 +461,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$submittedValues"></a>
 	<p></p>
 	<h4>$submittedValues = <span class="value">array()</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a18">18</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a27">27</a>]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -412,7 +491,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a41">41</a>]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a55">55</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -446,7 +525,7 @@ $method = null])</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$method</b>&nbsp;&nbsp;</td>
-        <td>The HTTP method of the form. If not set, assumes POST. (change this ?)</td>
+        <td>(Optional): The HTTP method of the form. If not set, assumes POST. (change this ?)</td>
       </tr>
         </table>
     </div><br />
@@ -454,7 +533,7 @@ $method = null])</code>
   </div>
   <hr />
 	<a name="methodaddField"></a>
-	<h3>method addField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a59">59</a>]</span></h3>
+	<h3>method addField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a76">76</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -464,12 +543,12 @@ $field)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Add a form field to the form. The form uniquely identifies each form field by an index. By default the label is a form field's index. If the label is blank the addField function uses an internally generated value. This function always returns the index it is using so that form fields can be retrieved using getField($index).<br /><br /><br /><br />
+		Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>an index the form instance uses to uniquely identify the form field.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the string the form uses to uniquely identify the form field. Can be passed to getField() to retrieve the form field.</td>
   </tr>
   <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../com-form/Form.html#methodgetField">Form::getField()</a></td>
@@ -495,8 +574,38 @@ $field)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodcurrent"></a>
+	<h3>method current <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a311">311</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void current(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::current</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodfieldExists"></a>
-	<h3>method fieldExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a73">73</a>]</span></h3>
+	<h3>method fieldExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a90">90</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -535,7 +644,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodgetField"></a>
-	<h3>method getField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a84">84</a>]</span></h3>
+	<h3>method getField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a101">101</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -576,8 +685,194 @@ $labelString)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetMethod"></a>
+	<h3>method getMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a128">128</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string getMethod(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get the HTTP method used by this form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the HTTP method used by this form</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>change to return a class constant</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetPrintFields"></a>
+	<h3>method getPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a272">272</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean getPrintFields(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Check if the form is set to print it's input fields with a call to render()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true if form is set to print fields and false otherwise</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetSubmittedValues"></a>
+	<h3>method getSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a206">206</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array|boolean getSubmittedValues(
+[boolean
+$formatNicely = true])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get the data filled out in the form field. This method returns false if the form  was not submitted. (ie. submitted() returns false.)  An associative array of the submitted values is returned with the same keys used with getField(), with the exception of Radio buttons.<br /><br /><p>-Values for checkboxes are booleans (by default. see $formatNicely parameter)  -Values for file upload fields are an associative array identical to $FILE[&quot;fieldName&quot;] if a file was uploaded and false otherwise.  -Keys for Radio buttons in the associative array are accessed by the name attribute</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>An associative array of values filled out in the form or false if the form was not submitted.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">boolean&nbsp;&nbsp;</td>
+        <td><b>$formatNicely</b>&nbsp;&nbsp;</td>
+        <td>(Optional): Defaults to true. When true method returns boolean values for checkboxes instead of the value attributes of the checkboxes.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodkey"></a>
+	<h3>method key <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a316">316</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void key(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::key</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodloadSubmittedValues"></a>
+	<h3>method loadSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a238">238</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array|boolean loadSubmittedValues(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Load sumbitted values into the form field. This method returns false if the form  was not submitted.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>An associative array of values filled out in the form (identical to the return value of getSubmittedValues()) or false if the form was not submitted.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodnext"></a>
+	<h3>method next <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a321">321</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void next(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::next</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodremoveField"></a>
-	<h3>method removeField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a97">97</a>]</span></h3>
+	<h3>method removeField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a114">114</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -619,7 +914,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a111">111</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a292">292</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -656,12 +951,187 @@ $breakChar = &quot;&lt;br /&gt;\n&quot;])</code>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
+  <hr />
+	<a name="methodrewind"></a>
+	<h3>method rewind <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a325">325</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void rewind(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::rewind</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetMethod"></a>
+	<h3>method setMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a139">139</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string setMethod(
+string
+$method)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set the HTTP method used by this form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the previous HTTP method used by this form, or false if parameter is messed up.</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>throw IlleglArgumentException</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>change to take method as a class constant</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$method</b>&nbsp;&nbsp;</td>
+        <td>must be the string POST or GET</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetPrintFields"></a>
+	<h3>method setPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a281">281</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string setPrintFields(
+string
+$printFields)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set whether or not the form will print input fields.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the previous value for printFields</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$printFields</b>&nbsp;&nbsp;</td>
+        <td>the form will print all input fields if true and not if false</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsubmitted"></a>
+	<h3>method submitted <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a160">160</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean|string submitted(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Check if this form was submitted. This method checks the appropriate  superglobal array $_GET|$_POST to see if the key for the key of the submit button  is present. This method will not work if the form has no submit button.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true if the form was submitted and false otherwise.</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>throw Exception if the form does not have a submit button.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodvalid"></a>
+	<h3>method valid <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a329">329</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void valid(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::valid</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
 </div><br />
 
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 22 Mar 2012 09:41:28 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 23 Mar 2012 14:26:51 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

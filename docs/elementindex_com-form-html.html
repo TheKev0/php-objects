@@ -151,9 +151,9 @@
 		<h2>g</h2>
 		<dl>
 							<dt><b>getOptionElement</b></dt>
-				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetOptionElement">Select::getOptionElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the Element object encapsulating the option</dd>
+				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetOptionElement">Select::getOptionElement()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get an option element by the value attribute. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string.</dd>
 							<dt><b>getSelected</b></dt>
-				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetSelected">Select::getSelected()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get selected option(s).</dd>
+				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodgetSelected">Select::getSelected()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get selected option(s) values. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string. The string(s) returned by this method can be used in getOptionElement($value) to retrieve the option Element.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_com-form-html.html#top">top</a><br>
@@ -194,6 +194,8 @@
 				<dd>in file Radio.php, class <a href="com-form-html/Radio.html">Radio</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates a Radio buttom form input field.</dd>
 							<dt><b>render</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodrender">Select::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
+							<dt><b>render</b></dt>
+				<dd>in file Checkbox.php, method <a href="com-form-html/Checkbox.html#methodrender">Checkbox::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
 							<dt><b>render</b></dt>
 				<dd>in file TextArea.php, method <a href="com-form-html/TextArea.html#methodrender">TextArea::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the markup for this input. Has alias __toString()</dd>
 							<dt><b>Reset</b></dt>
@@ -243,7 +245,7 @@
 	<a href="elementindex_com-form-html.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 22 Mar 2012 09:41:26 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 23 Mar 2012 14:26:47 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

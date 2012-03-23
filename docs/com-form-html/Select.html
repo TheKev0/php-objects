@@ -405,19 +405,19 @@ Encapsulates an HTML select field.<br /><br /><br /><br />
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearOptions() function</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearOptions($values[]) function</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearOption() function</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearOption($value) function</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>options():Element[] function</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>setUnselected function</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>addSelected(value) function</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearSelected function</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>clearSelected() function</td>
   </tr>
 </table>
 </div>
@@ -469,7 +469,7 @@ $option)</code>
           <tr>
         <td class="type">Option[]|array&nbsp;&nbsp;</td>
         <td><b>$option</b>&nbsp;&nbsp;</td>
-        <td>An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option.</td>
+        <td>An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option. Otherwise the value attributes of the options will be the same as the option strings.</td>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
@@ -492,7 +492,7 @@ $option)</code>
   </div>
   <hr />
 	<a name="methodaddOption"></a>
-	<h3>method addOption <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a104">104</a>]</span></h3>
+	<h3>method addOption <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a107">107</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -526,7 +526,7 @@ $value = &quot;&quot;])</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$value</b>&nbsp;&nbsp;</td>
-        <td>(Optional) value attribute of option tag</td>
+        <td>(Optional) value attribute of option tag. Defaults to same as option string</td>
       </tr>
         </table>
     </div><br />
@@ -534,18 +534,18 @@ $value = &quot;&quot;])</code>
   </div>
   <hr />
 	<a name="methodgetOptionElement"></a>
-	<h3>method getOptionElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a79">79</a>]</span></h3>
+	<h3>method getOptionElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a82">82</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array getOptionElement(
 
-$option, string
+$value, string
 $display)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Get the Element object encapsulating the option<br /><br /><br /><br />
+		Get an option element by the value attribute. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -570,7 +570,7 @@ $display)</code>
       </tr>
           <tr>
         <td class="type">&nbsp;&nbsp;</td>
-        <td><b>$option</b>&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -588,12 +588,12 @@ $display)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Get selected option(s).<br /><br /><br /><br />
+		Get selected option(s) values. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string. The string(s) returned by this method can be used in getOptionElement($value) to retrieve the option Element.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>selected option(s). array of strings of selected options, or false if nothing is selected.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>selected option(s). the value attribute of the selected option, or an array of values of selected options, or false if nothing is selected.</td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -610,7 +610,7 @@ $display)</code>
   </div>
   <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a115">115</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a119">119</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -638,7 +638,7 @@ $display)</code>
   </div>
   <hr />
 	<a name="methodsetOptions"></a>
-	<h3>method setOptions <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a87">87</a>]</span></h3>
+	<h3>method setOptions <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a90">90</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -666,7 +666,7 @@ $options)</code>
           <tr>
         <td class="type">array&nbsp;&nbsp;</td>
         <td><b>$options</b>&nbsp;&nbsp;</td>
-        <td>An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option.</td>
+        <td>An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option. If the array is not associative the values will be the same as the option string.</td>
       </tr>
         </table>
     </div><br />
@@ -679,7 +679,8 @@ $options)</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>string|boolean|array setSelected(
-array|string
+
+$value, array|string
 $selected)</code>
     </td></tr></table>
     </td></tr></table><br />
@@ -689,7 +690,7 @@ $selected)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>previously selected option(s). array of strings of selected options, or false if nothing is selected. Identical to value returned by getSelected() just before the call to this method.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>previously selected option(s). value attribute of selected option, array of value attributes of selected options, or false if nothing is selected.</td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -705,7 +706,12 @@ $selected)</code>
           <tr>
         <td class="type">array|string&nbsp;&nbsp;</td>
         <td><b>$selected</b>&nbsp;&nbsp;</td>
-        <td>The selected option(s) or an array of selected options.</td>
+        <td>The value attribute of selected option(s) or an array of value attributes of selected options. If no value was explicitly defined in setOptions(), addOption(), or the constructor just use the option string</td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
       </tr>
         </table>
     </div><br />
@@ -716,7 +722,7 @@ $selected)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 22 Mar 2012 09:41:30 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Fri, 23 Mar 2012 14:26:52 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>
