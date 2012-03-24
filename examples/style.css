@@ -1,0 +1,11 @@
+.label{
+	width: 250px;
+	display: inline-block;
+	text-align: right;
+	margin-right: 10px;
+	vertical-align: top;	
+}
+
+form{
+	line-height: 18pt;
+}

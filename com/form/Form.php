@@ -9,7 +9,7 @@
  * @todo add support for fieldsets
  * @todo add support for default tab indexing
  */
-class Form extends Element implements Iterator{
+class Form extends Element implements Iterator, ArrayAccess{
 	
 	/**
 	 * Stores the input fields as an array of AbstractInput objects.
@@ -303,7 +303,28 @@ class Form extends Element implements Iterator{
 /*
  * ArrayAccess methods here...
  */
+	public function offsetExists($offset){
+		return array_key_exists($offset, $this->fields);
+	}
 	
+	public function offsetGet($offset){
+		return $this->getField($offset);
+	}
+	
+	/**
+	 * @todo throw exception if value is not an AbstractInput
+	 */
+	public function offsetSet($offset, $value){
+		if(!($value instanceof AbstractInput)){
+			//throw exception
+			return false;
+		}
+		$this->fields[$offset] = $value;
+	}
+	
+	public function offsetUnset($offset){
+		unset($this->fields[$offset]);
+	}
  
  /*
  * Iterator methods here...
