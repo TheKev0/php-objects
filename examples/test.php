@@ -35,13 +35,13 @@
 
 	$form->loadSubmittedValues();
 
-	$html = "";
-	foreach($form as $key => $field){
-		$field->setPrintLabel(false);
-		$html .= "<span class= \"label\">".$field->getLabelElement()."</span><span>$field</span><br />\n";
-	}
-	$form->setPrintFields(false);
-	$form->setInnerHTML($html);
+//	$html = "";
+//	foreach($form as $key => $field){
+//		$field->setPrintLabel(false);
+//		$html .= "<span class= \"label\">".$field->getLabelElement()."</span><span>$field</span><br />\n";
+//	}
+//	$form->setPrintFields(false);
+//	$form->setInnerHTML($html);
 	
 	
 ?>

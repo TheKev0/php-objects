@@ -3,11 +3,12 @@
  * This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.
  * @package com.form
  * @todo if no submit button, add a hidden input field to act as a submit.
- * @todo implement ArrayAccess
+ * @todo method to get submit fields directly
  * @todo make POST and GET class constants
  * @todo add support for enctype
  * @todo add support for fieldsets
  * @todo add support for default tab indexing
+ * @todo add support for different render formats
  */
 class Form extends Element implements Iterator, ArrayAccess{
 	
@@ -286,14 +287,22 @@ class Form extends Element implements Iterator, ArrayAccess{
 	
 	/**
 	 * Prints the XML for the form. Has alias __toString().
-	 * @param string $breakChar (Optional) newline character to print between fields default: "<br />\n"
+	 * @param string $printKevStyle (Optional) wrap labales in span with class attribute 'label'. Defaults to false.
+	 * @param string $breakString (Optional) The string to use as a line break between form elements. Defaults to "\n<br />"
 	 * @return string A string representation of this form. ie. The HTML
 	 */
-	public function render($breakChar="<br />\n"){
+	public function render($printKevStyle=true, $breakString= "\n<br />"){
+		
 		$inner = "\n";
 		if($this->printFields){
 			foreach($this->fields as $key => $field){
-				$inner .= "\t" . $field->render() . $breakChar;
+				if($printKevStyle){
+					$field->setPrintLabel(false);
+					$inner .= "<span class= \"label\">" . $field->getLabelElement() . "</span>";
+					$inner .= "<span>$field</span><br />\n";
+				}else{
+					$inner .= "\t" . $field->render() . $breakString;
+				}
 			}
 			$this->setInnerHTML($inner);
 		}
