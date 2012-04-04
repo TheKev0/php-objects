@@ -61,7 +61,7 @@
 		<h2>a</h2>
 		<dl>
 							<dt><b>$action</b></dt>
-				<dd>in file Form.php, variable <a href="com-form/Form.html#var$action">Form::$action</a></dd>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$action">Form::$action</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The action attribute of the form field</dd>
 							<dt><b>$attributes</b></dt>
 				<dd>in file Element.php, variable <a href="com/Element.html#var$attributes">Element::$attributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;An associative array of attributes for this Element.</dd>
 							<dt><b>AbstractInput</b></dt>
@@ -69,7 +69,7 @@
 							<dt><b>addAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodaddAttribute">Element::addAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an attribute to this Element. If given attribute is already defined new value is appended.</dd>
 							<dt><b>addField</b></dt>
-				<dd>in file Form.php, method <a href="com-form/Form.html#methodaddField">Form::addField()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used.</dd>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodaddField">Form::addField()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used. If a file upload field is added the enctype attribute is automatically set to &quot;multipart/form-data&quot; unless a call to setEnctype() has already been made.</dd>
 							<dt><b>addOption</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodaddOption">Select::addOption()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an option to the select field.</dd>
 							<dt><b>arrayToAttributesString</b></dt>
@@ -104,6 +104,8 @@
 	<div>
 		<h2>e</h2>
 		<dl>
+							<dt><b>$enctype</b></dt>
+				<dd>in file Form.php, variable <a href="com-form/Form.html#var$enctype">Form::$enctype</a><br>&nbsp;&nbsp;&nbsp;&nbsp;enctype attribute of the form. Set automatically by addField() if a file upload field is added.</dd>
 							<dt><b>Element</b></dt>
 				<dd>in file Element.php, class <a href="com/Element.html">Element</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&lt;/a&gt; works)</dd>
 							<dt><b>Element.php</b></dt>
@@ -138,6 +140,8 @@
 		<dl>
 							<dt><b>getAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodgetAttribute">Element::getAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get an attribute of this Element.</dd>
+							<dt><b>getEnctype</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodgetEnctype">Form::getEnctype()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the enctype attribute of this form.</dd>
 							<dt><b>getField</b></dt>
 				<dd>in file Form.php, method <a href="com-form/Form.html#methodgetField">Form::getField()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve a form field using the label string or index returned by addField()</dd>
 							<dt><b>getID</b></dt>
@@ -332,6 +336,8 @@
 				<dd>in file Radio.php, method <a href="com-form-html/Radio.html#methodsetChecked">Radio::setChecked()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this checkbox as checked or unchecked.</dd>
 							<dt><b>setChecked</b></dt>
 				<dd>in file Checkbox.php, method <a href="com-form-html/Checkbox.html#methodsetChecked">Checkbox::setChecked()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this checkbox as checked or unchecked.</dd>
+							<dt><b>SetEnctype</b></dt>
+				<dd>in file Form.php, method <a href="com-form/Form.html#methodSetEnctype">Form::SetEnctype()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the enctype attribute of this form.</dd>
 							<dt><b>setID</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodsetID">Element::setID()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the id attribute of this Element.</dd>
 							<dt><b>setInnerHTML</b></dt>
@@ -348,6 +354,8 @@
 				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodsetName">AbstractInput::setName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the name attribute for this input field.</dd>
 							<dt><b>setOptions</b></dt>
 				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodsetOptions">Select::setOptions()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the options for this select field. Options are added to ones already present.</dd>
+							<dt><b>setOptionsWithValues</b></dt>
+				<dd>in file Select.php, method <a href="com-form-html/Select.html#methodsetOptionsWithValues">Select::setOptionsWithValues()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the options for this select field. Options are added to ones already present.</dd>
 							<dt><b>setPrintFields</b></dt>
 				<dd>in file Form.php, method <a href="com-form/Form.html#methodsetPrintFields">Form::setPrintFields()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set whether or not the form will print input fields.</dd>
 							<dt><b>setPrintLabel</b></dt>
@@ -388,14 +396,10 @@
 	<div>
 		<h2>v</h2>
 		<dl>
-							<dt><b>$validation_function</b></dt>
-				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$validation_function">AbstractInput::$validation_function</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DEPRECATED: Name of validation function to run against value</dd>
 							<dt><b>$value</b></dt>
 				<dd>in file AbstractInput.php, variable <a href="com-form/AbstractInput.html#var$value">AbstractInput::$value</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Value attributes of the input field.</dd>
 							<dt><b>valid</b></dt>
 				<dd>in file Form.php, method <a href="com-form/Form.html#methodvalid">Form::valid()</a></dd>
-							<dt><b>validate</b></dt>
-				<dd>in file AbstractInput.php, method <a href="com-form/AbstractInput.html#methodvalidate">AbstractInput::validate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DEPRECATED: Validates the value of an input field using a provided callback function. An arbitrary number of arguments can be passed to the callback function. The callback function's first parameter must be the value being validated because this function provides the value of the field as the first parameter automatically.</dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -435,7 +439,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 03 Apr 2012 17:08:30 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Wed, 04 Apr 2012 15:36:14 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

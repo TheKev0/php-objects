@@ -65,12 +65,12 @@ Source Location: /form/Form.php<br /><br />
 <div class="description">This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-                                            </ul>
+                                                        </ul>
 
 
 
 
-                            
+                                    
 
                 <p class="implements">
             Implements interfaces:
@@ -84,6 +84,7 @@ Source Location: /form/Form.php<br /><br />
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
     <li><a href="../com-form/Form.html#var$action">$action</a></li>
+    <li><a href="../com-form/Form.html#var$enctype">$enctype</a></li>
     <li><a href="../com-form/Form.html#var$fields">$fields</a></li>
     <li><a href="../com-form/Form.html#var$method">$method</a></li>
     <li><a href="../com-form/Form.html#var$position">$position</a></li>
@@ -101,6 +102,7 @@ Source Location: /form/Form.php<br /><br />
     <li><a href="../com-form/Form.html#methodaddField">addField</a></li>
     <li><a href="../com-form/Form.html#methodcurrent">current</a></li>
     <li><a href="../com-form/Form.html#methodfieldExists">fieldExists</a></li>
+    <li><a href="../com-form/Form.html#methodgetEnctype">getEnctype</a></li>
     <li><a href="../com-form/Form.html#methodgetField">getField</a></li>
     <li><a href="../com-form/Form.html#methodgetMethod">getMethod</a></li>
     <li><a href="../com-form/Form.html#methodgetPrintFields">getPrintFields</a></li>
@@ -115,6 +117,7 @@ Source Location: /form/Form.php<br /><br />
     <li><a href="../com-form/Form.html#methodremoveField">removeField</a></li>
     <li><a href="../com-form/Form.html#methodrender">render</a></li>
     <li><a href="../com-form/Form.html#methodrewind">rewind</a></li>
+    <li><a href="../com-form/Form.html#methodSetEnctype">SetEnctype</a></li>
     <li><a href="../com-form/Form.html#methodsetMethod">setMethod</a></li>
     <li><a href="../com-form/Form.html#methodsetPrintFields">setPrintFields</a></li>
     <li><a href="../com-form/Form.html#methodsubmitted">submitted</a></li>
@@ -286,11 +289,14 @@ Source Location: /form/Form.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line <a href="../__filesource/fsource_com-form__formForm.php.html#a13">13</a>]<br />
+[line <a href="../__filesource/fsource_com-form__formForm.php.html#a15">15</a>]<br />
 This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make POST and GET class constants</td>
+  </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>method to get submit fields directly</td>
   </tr>
@@ -298,19 +304,22 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>if no submit button, add a hidden input field to act as a submit.</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>make POST and GET class constants</td>
-  </tr>
-  <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for enctype</td>
-  </tr>
-  <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for default tab indexing</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for fieldsets</td>
   </tr>
   <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if enctype is not multipart/form-data and there is a file field.</td>
+  </tr>
+  <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for different render formats</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for default tab indexing</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if enctype, method, or action are set via addtAttributes()</td>
   </tr>
 </table>
 </div>
@@ -324,8 +333,32 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$action"></a>
 	<p></p>
 	<h4>$action = <span class="value">&nbsp;&quot;&quot;</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a33">33</a>]</p>
-  <br /><br />
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a35">35</a>]</p>
+  The action attribute of the form field<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$enctype"></a>
+	<p></p>
+	<h4>$enctype = <span class="value">&nbsp;&quot;application/x-www-form-urlencoded&quot;</span></h4>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a45">45</a>]</p>
+  enctype attribute of the form. Set automatically by addField() if a file upload field is added.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -348,7 +381,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$fields"></a>
 	<p></p>
 	<h4>$fields = <span class="value">array()</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a18">18</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a20">20</a>]</p>
   Stores the input fields as an array of AbstractInput objects.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -372,7 +405,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$method"></a>
 	<p></p>
 	<h4>$method = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a38">38</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a40">40</a>]</p>
   HTTP method used by the form. Defaults to POST<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -396,7 +429,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$position"></a>
 	<p></p>
 	<h4>$position = <span class="value">&nbsp;0</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a48">48</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a55">55</a>]</p>
   Current position used to implement functions for the Iterator interface.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -420,7 +453,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$printFields"></a>
 	<p></p>
 	<h4>$printFields = <span class="value">&nbsp;true</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a43">43</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a50">50</a>]</p>
   Boolean variable to determine whether fields should be printed with a call to render()<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -444,7 +477,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$submitted"></a>
 	<p></p>
 	<h4>$submitted = <span class="value">&nbsp;null</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a23">23</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a25">25</a>]</p>
   A state variable to indicate whether the form has been submitted.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -468,7 +501,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 	<a name="var$submittedValues"></a>
 	<p></p>
 	<h4>$submittedValues = <span class="value">array()</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a28">28</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formForm.php.html#a30">30</a>]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -498,7 +531,7 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a56">56</a>]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a65">65</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -540,7 +573,7 @@ $method = null])</code>
   </div>
   <hr />
 	<a name="methodaddField"></a>
-	<h3>method addField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a77">77</a>]</span></h3>
+	<h3>method addField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a86">86</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -550,7 +583,7 @@ $field)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used.<br /><br /><br /><br />
+		Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used. If a file upload field is added the enctype attribute is automatically set to &quot;multipart/form-data&quot; unless a call to setEnctype() has already been made.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -582,7 +615,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodcurrent"></a>
-	<h3>method current <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a341">341</a>]</span></h3>
+	<h3>method current <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a375">375</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -612,7 +645,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodfieldExists"></a>
-	<h3>method fieldExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a91">91</a>]</span></h3>
+	<h3>method fieldExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a103">103</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -650,8 +683,36 @@ $labelString)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetEnctype"></a>
+	<h3>method getEnctype <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a170">170</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string getEnctype(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get the enctype attribute of this form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the enctype attribute used by this form</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetField"></a>
-	<h3>method getField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a102">102</a>]</span></h3>
+	<h3>method getField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a114">114</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -693,7 +754,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodgetMethod"></a>
-	<h3>method getMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a129">129</a>]</span></h3>
+	<h3>method getMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a141">141</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -724,7 +785,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodgetPrintFields"></a>
-	<h3>method getPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a273">273</a>]</span></h3>
+	<h3>method getPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a306">306</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -752,7 +813,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodgetSubmittedValues"></a>
-	<h3>method getSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a207">207</a>]</span></h3>
+	<h3>method getSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a240">240</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -791,7 +852,7 @@ $formatNicely = true])</code>
   </div>
   <hr />
 	<a name="methodkey"></a>
-	<h3>method key <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a346">346</a>]</span></h3>
+	<h3>method key <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a380">380</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -821,7 +882,7 @@ $formatNicely = true])</code>
   </div>
   <hr />
 	<a name="methodloadSubmittedValues"></a>
-	<h3>method loadSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a239">239</a>]</span></h3>
+	<h3>method loadSubmittedValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a272">272</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -849,7 +910,7 @@ $formatNicely = true])</code>
   </div>
   <hr />
 	<a name="methodnext"></a>
-	<h3>method next <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a351">351</a>]</span></h3>
+	<h3>method next <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a385">385</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -879,7 +940,7 @@ $formatNicely = true])</code>
   </div>
   <hr />
 	<a name="methodoffsetExists"></a>
-	<h3>method offsetExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a315">315</a>]</span></h3>
+	<h3>method offsetExists <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a349">349</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -920,7 +981,7 @@ $offset)</code>
   </div>
   <hr />
 	<a name="methodoffsetGet"></a>
-	<h3>method offsetGet <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a319">319</a>]</span></h3>
+	<h3>method offsetGet <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a353">353</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -961,7 +1022,7 @@ $offset)</code>
   </div>
   <hr />
 	<a name="methodoffsetSet"></a>
-	<h3>method offsetSet <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a326">326</a>]</span></h3>
+	<h3>method offsetSet <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a360">360</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1011,7 +1072,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodoffsetUnset"></a>
-	<h3>method offsetUnset <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a334">334</a>]</span></h3>
+	<h3>method offsetUnset <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a368">368</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1052,7 +1113,7 @@ $offset)</code>
   </div>
   <hr />
 	<a name="methodremoveField"></a>
-	<h3>method removeField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a115">115</a>]</span></h3>
+	<h3>method removeField <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a127">127</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1094,7 +1155,7 @@ $labelString)</code>
   </div>
   <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a294">294</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a327">327</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1139,7 +1200,7 @@ $breakString = &quot;\n&lt;br /&gt;&quot;])</code>
   </div>
   <hr />
 	<a name="methodrewind"></a>
-	<h3>method rewind <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a355">355</a>]</span></h3>
+	<h3>method rewind <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a389">389</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1168,8 +1229,47 @@ $breakString = &quot;\n&lt;br /&gt;&quot;])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodSetEnctype"></a>
+	<h3>method SetEnctype <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a179">179</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string SetEnctype(
+string
+$enctype)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set the enctype attribute of this form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the previous enctype attribute used by this form</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$enctype</b>&nbsp;&nbsp;</td>
+        <td>the enctype attribute to be used with this form</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsetMethod"></a>
-	<h3>method setMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a140">140</a>]</span></h3>
+	<h3>method setMethod <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a152">152</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1214,7 +1314,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodsetPrintFields"></a>
-	<h3>method setPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a282">282</a>]</span></h3>
+	<h3>method setPrintFields <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a315">315</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1253,7 +1353,7 @@ $printFields)</code>
   </div>
   <hr />
 	<a name="methodsubmitted"></a>
-	<h3>method submitted <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a161">161</a>]</span></h3>
+	<h3>method submitted <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a194">194</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1284,7 +1384,7 @@ $printFields)</code>
   </div>
   <hr />
 	<a name="methodvalid"></a>
-	<h3>method valid <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a359">359</a>]</span></h3>
+	<h3>method valid <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formForm.php.html#a393">393</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1317,7 +1417,7 @@ $printFields)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 03 Apr 2012 17:08:33 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Wed, 04 Apr 2012 15:36:17 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

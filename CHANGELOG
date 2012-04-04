@@ -1,0 +1,4 @@
+04/04/12
+Added support for enctype to Select
+Removed validation function from AbstractInput
+Added setOptionsWithValues() to Select

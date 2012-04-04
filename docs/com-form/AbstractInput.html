@@ -65,12 +65,12 @@ Source Location: /form/AbstractInput.php<br /><br />
 <div class="description">This is an abstract subclass of Element that encapsulates an HTML or XForm input field. This class does not pertain specifically to HTML, XForms, etc. It is meant to be general and specific types of input fields are defined as children of this object.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-                    </ul>
+                                </ul>
 
 
 
 
-            
+                    
 
         
 </td>
@@ -83,7 +83,6 @@ Source Location: /form/AbstractInput.php<br /><br />
     <li><a href="../com-form/AbstractInput.html#var$label">$label</a></li>
     <li><a href="../com-form/AbstractInput.html#var$name">$name</a></li>
     <li><a href="../com-form/AbstractInput.html#var$printLabel">$printLabel</a></li>
-    <li><a href="../com-form/AbstractInput.html#var$validation_function">$validation_function</a></li>
     <li><a href="../com-form/AbstractInput.html#var$value">$value</a></li>
   </ul>
 </td>
@@ -104,7 +103,6 @@ Source Location: /form/AbstractInput.php<br /><br />
     <li><a href="../com-form/AbstractInput.html#methodsetName">setName</a></li>
     <li><a href="../com-form/AbstractInput.html#methodsetPrintLabel">setPrintLabel</a></li>
     <li><a href="../com-form/AbstractInput.html#methodsetValue">setValue</a></li>
-    <li><a href="../com-form/AbstractInput.html#methodvalidate">validate</a></li>
   </ul>
 </td>
 
@@ -307,16 +305,22 @@ Source Location: /form/AbstractInput.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a8">8</a>]<br />
+[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a10">10</a>]<br />
 This is an abstract subclass of Element that encapsulates an HTML or XForm input field. This class does not pertain specifically to HTML, XForms, etc. It is meant to be general and specific types of input fields are defined as children of this object.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>append default id of each field with _&lt;field type&gt;</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if name, id, or value are set via addAttribute.</td>
+  </tr>
+  <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>prefix default id and names with something to identify my library</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>append default id of each field with _&lt;field type&gt;</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>Add methods addStyleRule, setStyleRule</td>
   </tr>
   <tr>
     <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
@@ -333,7 +337,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 	<a name="var$identifier"></a>
 	<p></p>
 	<h4>static $identifier = <span class="value">&nbsp;0</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a44">44</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a40">40</a>]</p>
   Use as a default, internally generated name, id, etc. (auto-incremented)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -357,7 +361,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 	<a name="var$id"></a>
 	<p></p>
 	<h4>$id = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a18">18</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a20">20</a>]</p>
   ID attribute of the input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -385,7 +389,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 	<a name="var$label"></a>
 	<p></p>
 	<h4>$label = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a23">23</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a25">25</a>]</p>
   Holds the label of the input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -409,7 +413,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 	<a name="var$name"></a>
 	<p></p>
 	<h4>$name = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a13">13</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a15">15</a>]</p>
   Name attribute of the input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -433,7 +437,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 	<a name="var$printLabel"></a>
 	<p></p>
 	<h4>$printLabel = <span class="value">&nbsp;true</span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a33">33</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a35">35</a>]</p>
   Boolean to control whether or not label tag will be printed.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -454,37 +458,10 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$validation_function"></a>
-	<p></p>
-	<h4>$validation_function = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a39">39</a>]</p>
-  DEPRECATED: Name of validation function to run against value<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>deprecated:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>mixed</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="var$value"></a>
 	<p></p>
 	<h4>$value = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a28">28</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a30">30</a>]</p>
   Value attributes of the input field.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -514,7 +491,7 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a53">53</a>]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a49">49</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -612,7 +589,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodgetLabelElement"></a>
-	<h3>method getLabelElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a91">91</a>]</span></h3>
+	<h3>method getLabelElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a87">87</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -640,7 +617,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodgetLabelString"></a>
-	<h3>method getLabelString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a110">110</a>]</span></h3>
+	<h3>method getLabelString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a106">106</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -668,7 +645,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodgetName"></a>
-	<h3>method getName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a71">71</a>]</span></h3>
+	<h3>method getName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a67">67</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -696,7 +673,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodgetPrintLabel"></a>
-	<h3>method getPrintLabel <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a129">129</a>]</span></h3>
+	<h3>method getPrintLabel <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a125">125</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -724,7 +701,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodgetValue"></a>
-	<h3>method getValue <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a148">148</a>]</span></h3>
+	<h3>method getValue <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a144">144</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -752,7 +729,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a188">188</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a164">164</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -794,7 +771,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodsetLabelElement"></a>
-	<h3>method setLabelElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a100">100</a>]</span></h3>
+	<h3>method setLabelElement <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a96">96</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -833,7 +810,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodsetLabelString"></a>
-	<h3>method setLabelString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a119">119</a>]</span></h3>
+	<h3>method setLabelString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a115">115</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -872,7 +849,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodsetName"></a>
-	<h3>method setName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a80">80</a>]</span></h3>
+	<h3>method setName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a76">76</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -911,7 +888,7 @@ $name)</code>
   </div>
   <hr />
 	<a name="methodsetPrintLabel"></a>
-	<h3>method setPrintLabel <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a138">138</a>]</span></h3>
+	<h3>method setPrintLabel <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a134">134</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -956,7 +933,7 @@ $label)</code>
   </div>
   <hr />
 	<a name="methodsetValue"></a>
-	<h3>method setValue <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a157">157</a>]</span></h3>
+	<h3>method setValue <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a153">153</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -993,51 +970,12 @@ $val)</code>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
-  <hr />
-	<a name="methodvalidate"></a>
-	<h3>method validate <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form__formAbstractInput.php.html#a169">169</a>]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void validate(
-[array
-$arguments = array()])</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		DEPRECATED: Validates the value of an input field using a provided callback function. An arbitrary number of arguments can be passed to the callback function. The callback function's first parameter must be the value being validated because this function provides the value of the field as the first parameter automatically.<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>deprecated:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$arguments</b>&nbsp;&nbsp;</td>
-        <td>This an array of the function name and it's arguments. The first element must be the callback function's name and the rest are the parameters to the function. The first parameter to the callback function (value being validated) must be omitted from this array.</td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
 </div><br />
 
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 03 Apr 2012 17:08:31 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Wed, 04 Apr 2012 15:36:15 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

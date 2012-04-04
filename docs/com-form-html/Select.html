@@ -109,6 +109,7 @@ Source Location: /form/html/Select.php<br /><br />
     <li><a href="../com-form-html/Select.html#methodgetSelected">getSelected</a></li>
     <li><a href="../com-form-html/Select.html#methodrender">render</a></li>
     <li><a href="../com-form-html/Select.html#methodsetOptions">setOptions</a></li>
+    <li><a href="../com-form-html/Select.html#methodsetOptionsWithValues">setOptionsWithValues</a></li>
     <li><a href="../com-form-html/Select.html#methodsetSelected">setSelected</a></li>
   </ul>
 </td>
@@ -152,12 +153,6 @@ Source Location: /form/html/Select.php<br /><br />
 </dd>
 <dt>
   <a href="../com-form/AbstractInput.html#var$printLabel">AbstractInput::$printLabel</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
-  <a href="../com-form/AbstractInput.html#var$validation_function">AbstractInput::$validation_function</a>
   </dt>
 <dd>
    
@@ -277,12 +272,6 @@ Source Location: /form/html/Select.php<br /><br />
   </dt>
   <dd>
     Set the value attribute for this input field.
-  </dd>
-    <dt>
-    <a href="../com-form/AbstractInput.html#methodvalidate">AbstractInput::validate()</a>
-  </dt>
-  <dd>
-    DEPRECATED: Validates the value of an input field using a provided callback function. An arbitrary number of arguments can be passed to the callback function. The callback function's first parameter must be the value being validated because this function provides the value of the field as the first parameter automatically.
   </dd>
   </dl>
 <h4>Class: <a href="../com/Element.html">Element</a></h4>
@@ -492,7 +481,7 @@ $option)</code>
   </div>
   <hr />
 	<a name="methodaddOption"></a>
-	<h3>method addOption <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a107">107</a>]</span></h3>
+	<h3>method addOption <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a125">125</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -610,7 +599,7 @@ $display)</code>
   </div>
   <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a119">119</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a137">137</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -638,7 +627,7 @@ $display)</code>
   </div>
   <hr />
 	<a name="methodsetOptions"></a>
-	<h3>method setOptions <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a90">90</a>]</span></h3>
+	<h3>method setOptions <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a109">109</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -648,7 +637,7 @@ $options)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Set the options for this select field. Options are added to ones already present.<br /><br /><br /><br />
+		Set the options for this select field. Options are added to ones already present.<br /><br /><p>This method makes the value attributes for the option tags the same as the option  values.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -666,7 +655,43 @@ $options)</code>
           <tr>
         <td class="type">array&nbsp;&nbsp;</td>
         <td><b>$options</b>&nbsp;&nbsp;</td>
-        <td>An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option. If the array is not associative the values will be the same as the option string.</td>
+        <td>An array of strings to be used as the options.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetOptionsWithValues"></a>
+	<h3>method setOptionsWithValues <span class="smalllinenumber">[line <a href="../__filesource/fsource_com-form-html__formhtmlSelect.php.html#a92">92</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setOptionsWithValues(
+array
+$options)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Set the options for this select field. Options are added to ones already present.<br /><br /><p>This method uses the keys of the array in the parameter as the value attributes  of the option tags.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$options</b>&nbsp;&nbsp;</td>
+        <td>An array of strings to be used as the options.</td>
       </tr>
         </table>
     </div><br />
@@ -722,7 +747,7 @@ $selected)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Tue, 03 Apr 2012 17:08:35 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Wed, 04 Apr 2012 15:36:19 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>
