@@ -31,17 +31,7 @@
 	$form->addField(new Submit("Submit"));
 	$form->addField(new Submit("Preview"));
 
-	$form->setAttribute("enctype", "multipart/form-data");
-
 	$form->loadSubmittedValues();
-
-//	$html = "";
-//	foreach($form as $key => $field){
-//		$field->setPrintLabel(false);
-//		$html .= "<span class= \"label\">".$field->getLabelElement()."</span><span>$field</span><br />\n";
-//	}
-//	$form->setPrintFields(false);
-//	$form->setInnerHTML($html);
 	
 	
 ?>

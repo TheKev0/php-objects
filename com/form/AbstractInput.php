@@ -4,6 +4,8 @@
  * @package com.form
  * @todo append default id of each field with _<field type>
  * @todo prefix default id and names with something to identify my library
+ * @todo Add methods addStyleRule, setStyleRule
+ * @todo warn if name, id, or value are set via addAttribute.
  */
 abstract class AbstractInput extends Element{
 
@@ -31,12 +33,6 @@ abstract class AbstractInput extends Element{
 	 * Boolean to control whether or not label tag will be printed.
 	 */
 	protected $printLabel = true;
-	
-	/**
-	 * DEPRECATED: Name of validation function to run against value
-	 * @deprecated
-	 */
-	protected $validation_function;
 	
 	/**
 	 * Use as a default, internally generated name, id, etc. (auto-incremented)
@@ -159,26 +155,6 @@ abstract class AbstractInput extends Element{
 		$this->value = $val;
 		$this->setAttribute("value", $val);
 		return $previous;
-	}
-	
-	/**
-	 * DEPRECATED: Validates the value of an input field using a provided callback function. An arbitrary number of arguments can be passed to the callback function. The callback function's first parameter must be the value being validated because this function provides the value of the field as the first parameter automatically.
-	 * @deprecated
-	 * @param array $arguments This an array of the function name and it's arguments. The first element must be the callback function's name and the rest are the parameters to the function. The first parameter to the callback function (value being validated) must be omitted from this array.
-	 */
-	public function validate($arguments=array()){
-		if(count($arguments) == 0){
-			$arguments = $this->validate_function;
-		}
-		if(count($arguments) == 0){
-			return true;
-		}
-
-		//call function and return results
-		$function = $arguments[0];
-		$args[0] = $this->value;
-		$args = array_merge($args, array_slice($arguments, 1));
-		return call_user_func_array($function, $args);
 	}
 	
 	/**

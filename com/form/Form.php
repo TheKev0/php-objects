@@ -9,6 +9,8 @@
  * @todo add support for fieldsets
  * @todo add support for default tab indexing
  * @todo add support for different render formats
+ * @todo warn if enctype is not multipart/form-data and there is a file field.
+ * @todo warn if enctype, method, or action are set via addtAttributes()
  */
 class Form extends Element implements Iterator, ArrayAccess{
 	
@@ -28,7 +30,7 @@ class Form extends Element implements Iterator, ArrayAccess{
 	protected $submittedValues = array();
 	
 	/**
-	 * 
+	 * The action attribute of the form field
 	 */
 	protected $action = "";
 	
@@ -36,6 +38,11 @@ class Form extends Element implements Iterator, ArrayAccess{
 	 * HTTP method used by the form. Defaults to POST
 	 */
 	protected $method;
+	
+	/**
+	 * enctype attribute of the form. Set automatically by addField() if a file upload field is added.
+	 */
+	 protected $enctype = "application/x-www-form-urlencoded";
 	
 	/**
 	 * Boolean variable to determine whether fields should be printed with a call to render()
@@ -46,6 +53,8 @@ class Form extends Element implements Iterator, ArrayAccess{
 	 * Current position used to implement functions for the Iterator interface.
 	 */
 	protected $position = 0;
+	
+	private $setEnctypeCalled = false;
 	
 	/**
 	 * Constructor: Create a form object to store AbstractInput form fields and automatically read submitted values from $_GET. $_POST
@@ -69,7 +78,7 @@ class Form extends Element implements Iterator, ArrayAccess{
 	}
 	
 	/**
-	 * Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used.
+	 * Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used. If a file upload field is added the enctype attribute is automatically set to "multipart/form-data" unless a call to setEnctype() has already been made.
 	 * @param AbstractInput $field the input field to add
 	 * @return string the string the form uses to uniquely identify the form field. Can be passed to getField() to retrieve the form field.
 	 * @see getField()
@@ -80,6 +89,9 @@ class Form extends Element implements Iterator, ArrayAccess{
 			$index = $field->getName();
 		}
 		$this->fields[$index] = $field;
+		if($field instanceof File && !$this->setEnctypeCalled){
+			$this->setEnctype("multipart/form-data");
+		}
 		return $index;
 	}
 	
@@ -150,6 +162,27 @@ class Form extends Element implements Iterator, ArrayAccess{
 	 	}
 	 	return false;
 	 }
+	 
+	/**
+	 * Get the enctype attribute of this form.
+	 * @return string the enctype attribute used by this form
+	 */
+	public function getEnctype(){
+		return $this->enctype;
+	}
+	
+	/**
+	* Set the enctype attribute of this form.
+	* @param string the enctype attribute to be used with this form
+	* @return string the previous enctype attribute used by this form
+	*/
+	public function SetEnctype($enctype){
+		$previous = $this->enctype;
+		$this->enctype = $enctype;
+		$this->setEnctypeCalled = true;
+		return $previous;
+	}
+	 
 	
 	/**
 	 * Check if this form was submitted. This method checks the appropriate 
@@ -293,6 +326,7 @@ class Form extends Element implements Iterator, ArrayAccess{
 	 */
 	public function render($printKevStyle=true, $breakString= "\n<br />"){
 		
+		$this->addAttribute("enctype", $this->enctype);
 		$inner = "\n";
 		if($this->printFields){
 			foreach($this->fields as $key => $field){

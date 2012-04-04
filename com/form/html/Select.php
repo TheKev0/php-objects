@@ -85,16 +85,34 @@ class Select extends AbstractInput{
 	
 	/**
 	 * Set the options for this select field. Options are added to ones already present.
-	 * @param array $options An array of strings to be used as the options. If array is associative the keys are used as the value attribute of each option. If the array is not associative the values will be the same as the option string.
+	 * This method uses the keys of the array in the parameter as the value attributes
+	 * of the option tags.
+	 * @param array $options An array of strings to be used as the options.
+	 */
+	public function setOptionsWithValues($options){
+		if(is_array($options)){
+			foreach($options as $key => $optionText){
+				$opt = new Element("option");
+				$opt->setAttribute("value", $key);
+				$opt->setInnerHTML($optionText);
+				$this->options[$key] = $opt;
+			}
+		}
+	}
+	
+	/**
+	 * Set the options for this select field. Options are added to ones already present.
+	 * This method makes the value attributes for the option tags the same as the option 
+	 * values.
+	 * @param array $options An array of strings to be used as the options.
 	 */
 	public function setOptions($options){
 		if(is_array($options)){
 			foreach($options as $key => $optionText){
 				$opt = new Element("option");
-				$value = (is_numeric($key)) ? $optionText : $key;
-				$opt->setAttribute("value", $value);
+				$opt->setAttribute("value", $optionText);
 				$opt->setInnerHTML($optionText);
-				$this->options[$value] = $opt;
+				$this->options[$optionText] = $opt;
 			}
 		}
 	}
