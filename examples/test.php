@@ -33,6 +33,18 @@
 
 	$form->loadSubmittedValues();
 	
+	//Element DOM Navigation
+	$div = new Element("div");
+	$div->appendChild(new Element("img", "", "", array("src"=>"http://us2.php.net/images/php.gif")));
+	$div->appendChild(new Element("img", "", "", array("src"=>"http://us2.php.net/images/php.gif")));
+	$div->appendChild(new Element("img", "", "", array("src"=>"http://us2.php.net/images/php.gif")));
+	foreach($div as $child){
+		if($child->getTagName() == "img"){
+			$child->setIsInline(true);
+		}
+	}
+	//echo $div;
+
 	
 ?>
 

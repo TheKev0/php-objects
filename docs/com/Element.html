@@ -59,16 +59,22 @@ Source Location: /Element.php<br /><br />
 
 <h3><a href="#class_details">Class Overview</a></h3>
 <pre></pre><br />
-<div class="description">Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&lt;/a&gt; works)</div><br /><br />
+<div class="description">Encapsulates xml or html tag. The constructor assumes a non-inline element</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-                          </ul>
+          <li>Kevork Sepetci</li>
+                                    </ul>
 
 
 
 
-                
+                        
 
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li>Iterator (internal interface)</li>            </ul>
+        </p>
         
 </td>
 
@@ -76,6 +82,7 @@ Source Location: /Element.php<br /><br />
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
     <li><a href="../com/Element.html#var$attributes">$attributes</a></li>
+    <li><a href="../com/Element.html#var$children">$children</a></li>
     <li><a href="../com/Element.html#var$id">$id</a></li>
     <li><a href="../com/Element.html#var$innerHTML">$innerHTML</a></li>
     <li><a href="../com/Element.html#var$isInline">$isInline</a></li>
@@ -89,20 +96,30 @@ Source Location: /Element.php<br /><br />
 <ul>
     <li><a href="../com/Element.html#method__construct">__construct</a></li>
     <li><a href="../com/Element.html#methodaddAttribute">addAttribute</a></li>
+    <li><a href="../com/Element.html#methodappendChild">appendChild</a></li>
     <li><a href="../com/Element.html#methodarrayToAttributesString">arrayToAttributesString</a></li>
     <li><a href="../com/Element.html#methodattributes">attributes</a></li>
+    <li><a href="../com/Element.html#methodchildren">children</a></li>
     <li><a href="../com/Element.html#methodclearAttribute">clearAttribute</a></li>
+    <li><a href="../com/Element.html#methodcurrent">current</a></li>
     <li><a href="../com/Element.html#methodgetAttribute">getAttribute</a></li>
+    <li><a href="../com/Element.html#methodgetChild">getChild</a></li>
     <li><a href="../com/Element.html#methodgetID">getID</a></li>
     <li><a href="../com/Element.html#methodgetInnerHTML">getInnerHTML</a></li>
     <li><a href="../com/Element.html#methodgetIsInline">getIsInline</a></li>
     <li><a href="../com/Element.html#methodgetTagName">getTagName</a></li>
+    <li><a href="../com/Element.html#methodkey">key</a></li>
+    <li><a href="../com/Element.html#methodnext">next</a></li>
+    <li><a href="../com/Element.html#methodnumChildren">numChildren</a></li>
+    <li><a href="../com/Element.html#methodremoveChild">removeChild</a></li>
     <li><a href="../com/Element.html#methodrender">render</a></li>
+    <li><a href="../com/Element.html#methodrewind">rewind</a></li>
     <li><a href="../com/Element.html#methodsetAttribute">setAttribute</a></li>
     <li><a href="../com/Element.html#methodsetID">setID</a></li>
     <li><a href="../com/Element.html#methodsetInnerHTML">setInnerHTML</a></li>
     <li><a href="../com/Element.html#methodsetIsInline">setIsInline</a></li>
     <li><a href="../com/Element.html#methodsetTagName">setTagName</a></li>
+    <li><a href="../com/Element.html#methodvalid">valid</a></li>
     <li><a href="../com/Element.html#method__toString">__toString</a></li>
   </ul>
 </td>
@@ -136,22 +153,28 @@ Source Location: /Element.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line <a href="../__filesource/fsource_com__Element.php.html#a10">10</a>]<br />
-Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&lt;/a&gt; works)<br /><br /><br /><br />
+[line <a href="../__filesource/fsource_com__Element.php.html#a16">16</a>]<br />
+Encapsulates xml or html tag. The constructor assumes a non-inline element<br /><br /><p>(table instead of img tags) This can be set explicityly using  setIsInline(). InnerHTML cannot be set after an Element has been set to be inline. This  class also stores child nodes and has simple functions to add/remove/iterate through  them. This class serves as a base class for any object that represents an HTML tag.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>store child elements (?, maybe)</td>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Kevork Sepetci</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add dom navigation functions: add/remove Child, children, count, xpath (see SimpleXMLElement), implement Traversable</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>throw exception if trying to set innerHTML when tag is inline.</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>customizeable settings for markup (tag names all caps, )</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add xpath (see SimpleXMLElement)</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>add static method to generate Element from SimpleXMLElement</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if id is set through setAttribute()</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>customizeable settings for markup (tag names all caps, )</td>
   </tr>
 </table>
 </div>
@@ -165,8 +188,32 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 	<a name="var$attributes"></a>
 	<p></p>
 	<h4>$attributes = <span class="value">array()</span></h4>
-	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a33">33</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a38">38</a>]</p>
   An associative array of attributes for this Element.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$children"></a>
+	<p></p>
+	<h4>$children = <span class="value">array()</span></h4>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a48">48</a>]</p>
+  Holds the child Element objects of this element Object<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -189,7 +236,7 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 	<a name="var$id"></a>
 	<p></p>
 	<h4>$id = <span class="value"></span></h4>
-	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a21">21</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a26">26</a>]</p>
   The id attribute of this Element<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -213,7 +260,7 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 	<a name="var$innerHTML"></a>
 	<p></p>
 	<h4>$innerHTML = <span class="value">&nbsp;&quot;&quot;</span></h4>
-	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a28">28</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a33">33</a>]</p>
   The inner content of this Element.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -243,7 +290,7 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 	<a name="var$isInline"></a>
 	<p></p>
 	<h4>$isInline = <span class="value">&nbsp;false</span></h4>
-	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a38">38</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a43">43</a>]</p>
   Indicates whether this tag is inline.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -267,7 +314,7 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 	<a name="var$tagName"></a>
 	<p></p>
 	<h4>$tagName = <span class="value">&nbsp;&quot;&quot;</span></h4>
-	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a15">15</a>]</p>
+	<p>[line <a href="../__filesource/fsource_com__Element.php.html#a21">21</a>]</p>
   The tag name of this Element (HTML ex: table for &lt;table&gt;&lt;/table&gt;)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -296,7 +343,7 @@ Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&
 <div class="tags">
   <hr />
 	<a name="methodarrayToAttributesString"></a>
-	<h3>static method arrayToAttributesString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a226">226</a>]</span></h3>
+	<h3>static method arrayToAttributesString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a293">293</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -336,7 +383,7 @@ $array)</code>
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a47">47</a>]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a59">59</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -436,7 +483,7 @@ $attributes = array()])</code>
   </div>
   <hr />
 	<a name="methodaddAttribute"></a>
-	<h3>method addAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a136">136</a>]</span></h3>
+	<h3>method addAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a148">148</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -483,8 +530,44 @@ $value)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodappendChild"></a>
+	<h3>method appendChild <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a207">207</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void appendChild(
+<a href="../com/Element.html">Element</a>
+$child)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Append a child Element Object to this Element object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../com/Element.html">Element</a>&nbsp;&nbsp;</td>
+        <td><b>$child</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodattributes"></a>
-	<h3>method attributes <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a113">113</a>]</span></h3>
+	<h3>method attributes <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a125">125</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -511,8 +594,36 @@ $value)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodchildren"></a>
+	<h3>method children <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a227">227</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array children(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get all children of this Element object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>An array of Element objects</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodclearAttribute"></a>
-	<h3>method clearAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a164">164</a>]</span></h3>
+	<h3>method clearAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a176">176</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -550,8 +661,44 @@ $name)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodcurrent"></a>
+	<h3>method current <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a306">306</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void current(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../com-form/Form.html#methodcurrent">Form::current()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::current</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetAttribute"></a>
-	<h3>method getAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a122">122</a>]</span></h3>
+	<h3>method getAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a134">134</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -589,8 +736,47 @@ $name)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetChild"></a>
+	<h3>method getChild <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a216">216</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../com/Element.html">Element</a>|boolean getChild(
+int
+$index)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get a child Element of this Element object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the child Element of this Element object at $index, or false if none exists.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$index</b>&nbsp;&nbsp;</td>
+        <td>the index of the child to return</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetID"></a>
-	<h3>method getID <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a58">58</a>]</span></h3>
+	<h3>method getID <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a70">70</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -618,7 +804,7 @@ $name)</code>
   </div>
   <hr />
 	<a name="methodgetInnerHTML"></a>
-	<h3>method getInnerHTML <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a95">95</a>]</span></h3>
+	<h3>method getInnerHTML <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a107">107</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -646,7 +832,7 @@ $name)</code>
   </div>
   <hr />
 	<a name="methodgetIsInline"></a>
-	<h3>method getIsInline <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a174">174</a>]</span></h3>
+	<h3>method getIsInline <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a186">186</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -674,7 +860,7 @@ $name)</code>
   </div>
   <hr />
 	<a name="methodgetTagName"></a>
-	<h3>method getTagName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a87">87</a>]</span></h3>
+	<h3>method getTagName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a99">99</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -701,8 +887,147 @@ $name)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodkey"></a>
+	<h3>method key <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a310">310</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void key(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../com-form/Form.html#methodkey">Form::key()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::key</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodnext"></a>
+	<h3>method next <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a314">314</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void next(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../com-form/Form.html#methodnext">Form::next()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::next</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodnumChildren"></a>
+	<h3>method numChildren <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a249">249</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int numChildren(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Return number of children of this Element.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>number of children of this Element</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodremoveChild"></a>
+	<h3>method removeChild <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a236">236</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../com/Element.html">Element</a>|boolean removeChild(
+int
+$index)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Remove a child Element of this Element object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the child removed Element of this Element object at $index, or false if none exists.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$index</b>&nbsp;&nbsp;</td>
+        <td>the index of the child to remove</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodrender"></a>
-	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a204">204</a>]</span></h3>
+	<h3>method render <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a265">265</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -751,8 +1076,44 @@ $name)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodrewind"></a>
+	<h3>method rewind <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a318">318</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void rewind(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../com-form/Form.html#methodrewind">Form::rewind()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::rewind</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsetAttribute"></a>
-	<h3>method setAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a153">153</a>]</span></h3>
+	<h3>method setAttribute <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a165">165</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -797,7 +1158,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodsetID"></a>
-	<h3>method setID <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a67">67</a>]</span></h3>
+	<h3>method setID <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a79">79</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -836,7 +1197,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodsetInnerHTML"></a>
-	<h3>method setInnerHTML <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a103">103</a>]</span></h3>
+	<h3>method setInnerHTML <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a115">115</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -872,7 +1233,7 @@ $innerHTML)</code>
   </div>
   <hr />
 	<a name="methodsetIsInline"></a>
-	<h3>method setIsInline <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a183">183</a>]</span></h3>
+	<h3>method setIsInline <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a195">195</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -911,7 +1272,7 @@ $isInline)</code>
   </div>
   <hr />
 	<a name="methodsetTagName"></a>
-	<h3>method setTagName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a79">79</a>]</span></h3>
+	<h3>method setTagName <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a91">91</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -949,8 +1310,44 @@ $tagName)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodvalid"></a>
+	<h3>method valid <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a322">322</a>]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void valid(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../com-form/Form.html#methodvalid">Form::valid()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::valid</dt>
+					</dl>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="method__toString"></a>
-	<h3>method __toString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a196">196</a>]</span></h3>
+	<h3>method __toString <span class="smalllinenumber">[line <a href="../__filesource/fsource_com__Element.php.html#a257">257</a>]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -981,7 +1378,7 @@ $tagName)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 04 Apr 2012 15:36:16 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 05 Apr 2012 10:28:27 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

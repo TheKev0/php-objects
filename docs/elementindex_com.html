@@ -57,9 +57,12 @@
 	[ <a href="elementindex_com.html#e">e</a> ]
 	[ <a href="elementindex_com.html#g">g</a> ]
 	[ <a href="elementindex_com.html#i">i</a> ]
+	[ <a href="elementindex_com.html#k">k</a> ]
+	[ <a href="elementindex_com.html#n">n</a> ]
 	[ <a href="elementindex_com.html#r">r</a> ]
 	[ <a href="elementindex_com.html#s">s</a> ]
 	[ <a href="elementindex_com.html#t">t</a> ]
+	[ <a href="elementindex_com.html#v">v</a> ]
 	[ <a href="elementindex_com.html#_">_</a> ]
 
   <hr />
@@ -83,6 +86,8 @@
 				<dd>in file Element.php, variable <a href="com/Element.html#var$attributes">Element::$attributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;An associative array of attributes for this Element.</dd>
 							<dt><b>addAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodaddAttribute">Element::addAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an attribute to this Element. If given attribute is already defined new value is appended.</dd>
+							<dt><b>appendChild</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodappendChild">Element::appendChild()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Append a child Element Object to this Element object</dd>
 							<dt><b>arrayToAttributesString</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodarrayToAttributesString">Element::arrayToAttributesString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Turns an associative array into a string to be used as the attributes in an xml tag.</dd>
 							<dt><b>attributes</b></dt>
@@ -95,10 +100,16 @@
 	<div>
 		<h2>c</h2>
 		<dl>
+							<dt><b>$children</b></dt>
+				<dd>in file Element.php, variable <a href="com/Element.html#var$children">Element::$children</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Holds the child Element objects of this element Object</dd>
+							<dt><b>children</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodchildren">Element::children()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get all children of this Element object</dd>
 							<dt><b>clearAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodclearAttribute">Element::clearAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Removes specified attribute of the Element.</dd>
 							<dt><b>com.inc.php</b></dt>
 				<dd>procedural page <a href="com/_com.inc.php.html">com.inc.php</a></dd>
+							<dt><b>current</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodcurrent">Element::current()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_com.html#top">top</a><br>
@@ -108,7 +119,7 @@
 		<h2>e</h2>
 		<dl>
 							<dt><b>Element</b></dt>
-				<dd>in file Element.php, class <a href="com/Element.html">Element</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates any NON INLINE html/xml tag (&lt;img /&gt; doesn't work, &lt;a&gt;&lt;/a&gt; works)</dd>
+				<dd>in file Element.php, class <a href="com/Element.html">Element</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encapsulates xml or html tag. The constructor assumes a non-inline element</dd>
 							<dt><b>Element.php</b></dt>
 				<dd>procedural page <a href="com/_Element.php.html">Element.php</a></dd>
 					</dl>
@@ -121,6 +132,8 @@
 		<dl>
 							<dt><b>getAttribute</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodgetAttribute">Element::getAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get an attribute of this Element.</dd>
+							<dt><b>getChild</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodgetChild">Element::getChild()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a child Element of this Element object</dd>
 							<dt><b>getID</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodgetID">Element::getID()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the id attribute of this Element.</dd>
 							<dt><b>getInnerHTML</b></dt>
@@ -147,12 +160,38 @@
 	</div>
 	<a href="elementindex_com.html#top">top</a><br>
   <hr />
+	<a name="k"></a>
+	<div>
+		<h2>k</h2>
+		<dl>
+							<dt><b>key</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodkey">Element::key()</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_com.html#top">top</a><br>
+  <hr />
+	<a name="n"></a>
+	<div>
+		<h2>n</h2>
+		<dl>
+							<dt><b>next</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodnext">Element::next()</a></dd>
+							<dt><b>numChildren</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodnumChildren">Element::numChildren()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return number of children of this Element.</dd>
+					</dl>
+	</div>
+	<a href="elementindex_com.html#top">top</a><br>
+  <hr />
 	<a name="r"></a>
 	<div>
 		<h2>r</h2>
 		<dl>
+							<dt><b>removeChild</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodremoveChild">Element::removeChild()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Remove a child Element of this Element object</dd>
 							<dt><b>render</b></dt>
 				<dd>in file Element.php, method <a href="com/Element.html#methodrender">Element::render()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prints the XML for this Element. Has alias __toString()</dd>
+							<dt><b>rewind</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodrewind">Element::rewind()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_com.html#top">top</a><br>
@@ -184,9 +223,19 @@
 					</dl>
 	</div>
 	<a href="elementindex_com.html#top">top</a><br>
+  <hr />
+	<a name="v"></a>
+	<div>
+		<h2>v</h2>
+		<dl>
+							<dt><b>valid</b></dt>
+				<dd>in file Element.php, method <a href="com/Element.html#methodvalid">Element::valid()</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_com.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 04 Apr 2012 15:36:14 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 05 Apr 2012 10:28:25 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

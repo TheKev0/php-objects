@@ -1,20 +1,25 @@
 <?php
 /**
- * Encapsulates any NON INLINE html/xml tag (<img /> doesn't work, <a></a> works)
+ * Encapsulates xml or html tag. The constructor assumes a non-inline element 
+ * (table instead of img tags) This can be set explicityly using 
+ * setIsInline(). InnerHTML cannot be set after an Element has been set to be inline. This
+ * class also stores child nodes and has simple functions to add/remove/iterate through 
+ * them. This class serves as a base class for any object that represents an HTML tag.
  * @package com
- * @todo store child elements (?, maybe)
- * @todo add dom navigation functions: add/remove Child, children, count, xpath (see SimpleXMLElement), implement Traversable
+ * @author Kevork Sepetci 
+ * @todo throw exception if trying to set innerHTML when tag is inline.
+ * @todo add xpath (see SimpleXMLElement)
  * @todo customizeable settings for markup (tag names all caps, )
  * @todo add static method to generate Element from SimpleXMLElement
+ * @todo warn if id is set through setAttribute()
  */
-class Element{
+class Element implements Iterator{
 	
 	/**
 	 * The tag name of this Element (HTML ex: table for <table></table>)
 	 */
 	protected $tagName = "";
 
-	
 	/**
 	 * The id attribute of this Element
 	 */
@@ -36,6 +41,13 @@ class Element{
 	 * Indicates whether this tag is inline.
 	 */
 	protected $isInline = false;
+	
+	/**
+	 * Holds the child Element objects of this element Object
+	 */
+	protected $children = array();
+	
+	private $position = 0;
 	
 	/**
 	 * Construct an Element object.
@@ -190,6 +202,55 @@ class Element{
 	}
 	
 	/**
+	 * Append a child Element Object to this Element object
+	 */
+	public function appendChild(Element $child){
+		$this->children[] = $child;
+	}
+	
+	/**
+	 * Get a child Element of this Element object
+	 * @param int $index the index of the child to return
+	 * @return Element|boolean the child Element of this Element object at $index, or false if none exists.
+	 */
+	public function getChild($index){
+		if(isset($this->children[$index])){
+			return $this->children[$index];
+		}
+		return false;
+	}
+	
+	/**
+	 * Get all children of this Element object
+	 * @return array An array of Element objects
+	 */
+	public function children(){
+		return $this->children;
+	}
+	
+	/**
+	 * Remove a child Element of this Element object
+	 * @param int $index the index of the child to remove
+	 * @return Element|boolean the child removed Element of this Element object at $index, or false if none exists.
+	 */
+	public function removeChild($index){
+		if(isset($this->children[$index])){
+			$child = $this->children[$index];
+			unset($this->children[$index]);
+			return $child;
+		}
+		return false;
+	}
+	
+	/**
+	 * Return number of children of this Element.
+	 * @return int number of children of this Element
+	 */
+	public function numChildren(){
+		return count($this->children);
+	}
+	
+	/**
 	 * Magic method. Alias of render()
 	 * @return string A string representation of this Element. ie. The XML
 	 */
@@ -203,10 +264,17 @@ class Element{
 	 */
 	public function render(){
 		if($this->getIsInline() === false){
-			$id = (!empty($this->id)) ? "id= \"{$this->id}\" " : "";
+			$id = (!empty($this->id)) ? "id= \" {$this->id}\" " : "";
 			$html = "<{$this->tagName} $id";
 			$html .= $this->arrayToAttributesString($this->attributes);
-			$html .= ">{$this->innerHTML}</{$this->tagName}>";
+			$html .= ">\n";
+			if(!empty($this->innerHTML)){
+				$html .= "{$this->innerHTML}\n";
+			}
+			foreach($this->children as $child){
+				$html .= "\t" . $child . "\n";
+			}
+			$html .= "</{$this->tagName}>";
 			return $html;
 		}else{
 		$id = (!empty($this->id)) ? "id= \"{$this->id}\" " : "";
@@ -216,7 +284,6 @@ class Element{
 		return $html;
 		}
 	}
-
 	
 	/**
 	 * Turns an associative array into a string to be used as the attributes in an xml tag.
@@ -231,6 +298,29 @@ class Element{
 			$html .= $key . '= "'.$value.'" ';
 		}
 		return $html;
+	}
+	
+	/*
+ * Iterator methods here...
+ */
+	public function current(){
+		return $this->children[$this->position];
+	}
+	
+	public function key(){
+		return $this->position;
+	}
+	
+	public function next(){
+		$this->position++;
+	}
+	
+	public function rewind(){
+		$this->position = 0;
+	}
+	
+	public function valid(){
+		return isset($this->children[$this->position]);
 	}
 }
 

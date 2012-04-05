@@ -65,12 +65,13 @@ Source Location: /form/Form.php<br /><br />
 <div class="description">This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-                                                        </ul>
+          <li>Kevork Sepetci</li>
+                                                            </ul>
 
 
 
 
-                                    
+                                        
 
                 <p class="implements">
             Implements interfaces:
@@ -145,6 +146,12 @@ Source Location: /form/Form.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../com/Element.html#var$children">Element::$children</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../com/Element.html#var$id">Element::$id</a>
   </dt>
 <dd>
@@ -190,6 +197,12 @@ Source Location: /form/Form.php<br /><br />
     Adds an attribute to this Element. If given attribute is already defined new value is appended.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodappendChild">Element::appendChild()</a>
+  </dt>
+  <dd>
+    Append a child Element Object to this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodarrayToAttributesString">Element::arrayToAttributesString()</a>
   </dt>
   <dd>
@@ -202,16 +215,34 @@ Source Location: /form/Form.php<br /><br />
     Get all attributes of this Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodchildren">Element::children()</a>
+  </dt>
+  <dd>
+    Get all children of this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodclearAttribute">Element::clearAttribute()</a>
   </dt>
   <dd>
     Removes specified attribute of the Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodcurrent">Element::current()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodgetAttribute">Element::getAttribute()</a>
   </dt>
   <dd>
     Get an attribute of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetChild">Element::getChild()</a>
+  </dt>
+  <dd>
+    Get a child Element of this Element object
   </dd>
     <dt>
     <a href="../com/Element.html#methodgetID">Element::getID()</a>
@@ -238,10 +269,40 @@ Source Location: /form/Form.php<br /><br />
     Get the tagname of this Element
   </dd>
     <dt>
+    <a href="../com/Element.html#methodkey">Element::key()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodnext">Element::next()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodnumChildren">Element::numChildren()</a>
+  </dt>
+  <dd>
+    Return number of children of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodremoveChild">Element::removeChild()</a>
+  </dt>
+  <dd>
+    Remove a child Element of this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodrender">Element::render()</a>
   </dt>
   <dd>
     Prints the XML for this Element. Has alias __toString()
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodrewind">Element::rewind()</a>
+  </dt>
+  <dd>
+    
   </dd>
     <dt>
     <a href="../com/Element.html#methodsetAttribute">Element::setAttribute()</a>
@@ -274,6 +335,12 @@ Source Location: /form/Form.php<br /><br />
     Set the tagName for this Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodvalid">Element::valid()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../com/Element.html#method__toString">Element::__toString()</a>
   </dt>
   <dd>
@@ -295,6 +362,9 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Kevork Sepetci</td>
+  </tr>
+  <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>make POST and GET class constants</td>
   </tr>
   <tr>
@@ -304,19 +374,19 @@ This class encapsulates a form. It is an iterable collection of AbstractInput ob
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>if no submit button, add a hidden input field to act as a submit.</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for enctype</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for fieldsets</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for fieldsets</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for default tab indexing</td>
+  </tr>
+  <tr>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>revise to work with Element's DOM navigation if necessary</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if enctype is not multipart/form-data and there is a file field.</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for different render formats</td>
-  </tr>
-  <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>add support for default tab indexing</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if enctype, method, or action are set via addtAttributes()</td>
@@ -640,7 +710,7 @@ $field)</code>
 			<dl>
 			<dt>Iterator::current</dt>
 					</dl>
-		
+		Overrides <a href="../com/Element.html#methodcurrent">Element::current()</a> (parent method not documented)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
@@ -877,7 +947,7 @@ $formatNicely = true])</code>
 			<dl>
 			<dt>Iterator::key</dt>
 					</dl>
-		
+		Overrides <a href="../com/Element.html#methodkey">Element::key()</a> (parent method not documented)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
@@ -935,7 +1005,7 @@ $formatNicely = true])</code>
 			<dl>
 			<dt>Iterator::next</dt>
 					</dl>
-		
+		Overrides <a href="../com/Element.html#methodnext">Element::next()</a> (parent method not documented)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
@@ -1225,7 +1295,7 @@ $breakString = &quot;\n&lt;br /&gt;&quot;])</code>
 			<dl>
 			<dt>Iterator::rewind</dt>
 					</dl>
-		
+		Overrides <a href="../com/Element.html#methodrewind">Element::rewind()</a> (parent method not documented)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
@@ -1409,7 +1479,7 @@ $printFields)</code>
 			<dl>
 			<dt>Iterator::valid</dt>
 					</dl>
-		
+		Overrides <a href="../com/Element.html#methodvalid">Element::valid()</a> (parent method not documented)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
 </div><br />
@@ -1417,7 +1487,7 @@ $printFields)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 04 Apr 2012 15:36:17 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 05 Apr 2012 10:28:29 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

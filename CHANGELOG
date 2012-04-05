@@ -1,4 +1,8 @@
 04/04/12
-Added support for enctype to Select
+Added support for enctype to Form
 Removed validation function from AbstractInput
 Added setOptionsWithValues() to Select
+
+04/05/12
+Element now stores children elements and has simple accessors for them
+Element implements Iterator

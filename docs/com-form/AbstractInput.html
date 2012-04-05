@@ -65,12 +65,13 @@ Source Location: /form/AbstractInput.php<br /><br />
 <div class="description">This is an abstract subclass of Element that encapsulates an HTML or XForm input field. This class does not pertain specifically to HTML, XForms, etc. It is meant to be general and specific types of input fields are defined as children of this object.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
-                                </ul>
+          <li>Kevork Sepetci</li>
+                                    </ul>
 
 
 
 
-                    
+                        
 
         
 </td>
@@ -167,6 +168,12 @@ Source Location: /form/AbstractInput.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../com/Element.html#var$children">Element::$children</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../com/Element.html#var$innerHTML">Element::$innerHTML</a>
   </dt>
 <dd>
@@ -206,6 +213,12 @@ Source Location: /form/AbstractInput.php<br /><br />
     Adds an attribute to this Element. If given attribute is already defined new value is appended.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodappendChild">Element::appendChild()</a>
+  </dt>
+  <dd>
+    Append a child Element Object to this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodarrayToAttributesString">Element::arrayToAttributesString()</a>
   </dt>
   <dd>
@@ -218,16 +231,34 @@ Source Location: /form/AbstractInput.php<br /><br />
     Get all attributes of this Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodchildren">Element::children()</a>
+  </dt>
+  <dd>
+    Get all children of this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodclearAttribute">Element::clearAttribute()</a>
   </dt>
   <dd>
     Removes specified attribute of the Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodcurrent">Element::current()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodgetAttribute">Element::getAttribute()</a>
   </dt>
   <dd>
     Get an attribute of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodgetChild">Element::getChild()</a>
+  </dt>
+  <dd>
+    Get a child Element of this Element object
   </dd>
     <dt>
     <a href="../com/Element.html#methodgetID">Element::getID()</a>
@@ -254,10 +285,40 @@ Source Location: /form/AbstractInput.php<br /><br />
     Get the tagname of this Element
   </dd>
     <dt>
+    <a href="../com/Element.html#methodkey">Element::key()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodnext">Element::next()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodnumChildren">Element::numChildren()</a>
+  </dt>
+  <dd>
+    Return number of children of this Element.
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodremoveChild">Element::removeChild()</a>
+  </dt>
+  <dd>
+    Remove a child Element of this Element object
+  </dd>
+    <dt>
     <a href="../com/Element.html#methodrender">Element::render()</a>
   </dt>
   <dd>
     Prints the XML for this Element. Has alias __toString()
+  </dd>
+    <dt>
+    <a href="../com/Element.html#methodrewind">Element::rewind()</a>
+  </dt>
+  <dd>
+    
   </dd>
     <dt>
     <a href="../com/Element.html#methodsetAttribute">Element::setAttribute()</a>
@@ -290,6 +351,12 @@ Source Location: /form/AbstractInput.php<br /><br />
     Set the tagName for this Element.
   </dd>
     <dt>
+    <a href="../com/Element.html#methodvalid">Element::valid()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../com/Element.html#method__toString">Element::__toString()</a>
   </dt>
   <dd>
@@ -311,13 +378,16 @@ This is an abstract subclass of Element that encapsulates an HTML or XForm input
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Kevork Sepetci</td>
+  </tr>
+  <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>append default id of each field with _&lt;field type&gt;</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if name, id, or value are set via addAttribute.</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>prefix default id and names with something to identify my library</td>
   </tr>
   <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>prefix default id and names with something to identify my library</td>
+    <td><b>todo:</b>&nbsp;&nbsp;</td><td>warn if name, id, or value are set via addAttribute.</td>
   </tr>
   <tr>
     <td><b>todo:</b>&nbsp;&nbsp;</td><td>Add methods addStyleRule, setStyleRule</td>
@@ -975,7 +1045,7 @@ $val)</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 04 Apr 2012 15:36:15 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
+		    Documentation generated on Thu, 05 Apr 2012 10:28:26 -0700 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.4</a>
 	      </div>
       </td></tr></table>
     </td>

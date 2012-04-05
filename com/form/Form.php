@@ -5,11 +5,11 @@
  * @todo if no submit button, add a hidden input field to act as a submit.
  * @todo method to get submit fields directly
  * @todo make POST and GET class constants
- * @todo add support for enctype
  * @todo add support for fieldsets
  * @todo add support for default tab indexing
  * @todo add support for different render formats
  * @todo warn if enctype is not multipart/form-data and there is a file field.
+ * @todo revise to work with Element's DOM navigation if necessary
  * @todo warn if enctype, method, or action are set via addtAttributes()
  */
 class Form extends Element implements Iterator, ArrayAccess{

@@ -1,7 +1,7 @@
 <?php
 /**
  * This file includes all of the files in the commons API in the right order.
- * Changing the order of include files may break things.
+ * Changing the order of include files may break things!!!
  * @package com
  */
  
