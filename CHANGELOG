@@ -4,5 +4,11 @@ Removed validation function from AbstractInput
 Added setOptionsWithValues() to Select
 
 04/05/12
-Element now stores children elements and has simple accessors for them
-Element implements Iterator
+Element: now stores children elements and has simple accessors for them
+Element: implements Iterator
+
+04/10/12
+Element: can add child at any index
+Element: bugfix in removeChild()
+Element: implements ArrayAccess
+com.html.Table first working state with documentation

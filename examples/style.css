@@ -9,3 +9,12 @@
 form{
 	line-height: 18pt;
 }
+
+td{
+	border: 1px solid grey;
+	margin: 0px;
+}
+
+th{
+	margin-right: 1px solid grey;
+}

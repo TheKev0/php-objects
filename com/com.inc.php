@@ -22,3 +22,6 @@
 	require_once("form/html/Submit.php");
 	require_once("form/html/Reset.php");
 	require_once("form/html/Hidden.php");
+	
+	//Package: com.html
+	require_once("html/Table.php");

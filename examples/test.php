@@ -1,13 +1,4 @@
 <?php
-/*	This script uses a template and must set the following variables which a template file (a php script) will use.
- *	$_title
- *	$_javascript
- *	$_css
- *	$_head
- *	$_content
- *	$_keywords
- *	$_descrioption
- */
  
 //	header("Content-Type: text/plain");
  	ini_set("display_errors", 1);
@@ -15,7 +6,7 @@
  	
 	require_once("../com/com.inc.php");
 	
-	
+	//Form Example
 	$form = new Form();
 	$form->addField(new Checkbox("Online Only", "Online Only", false));
 	$form->addField(new File("Your file: ", ""));
@@ -33,6 +24,7 @@
 
 	$form->loadSubmittedValues();
 	
+	
 	//Element DOM Navigation
 	$div = new Element("div");
 	$div->appendChild(new Element("img", "", "", array("src"=>"http://us2.php.net/images/php.gif")));
@@ -45,7 +37,21 @@
 	}
 	//echo $div;
 
+
+	//Table Example
+	$table = new Table(5, array("Head1", "Head2", "Head3", "Head4", "Head5"));
+	$table->addRowStrings(array("a1", "b1", "c1", "d1", "e1"));
+	$table->addRowStrings(array("a2", "b2", "c2", "d2", "e2"));
+	$table->addRowStrings(array("a3", "b3", "c3", "d3", "e3"));
+	$table->addRowStrings(array("a4", "b4", "c4", "d4", "e4"));
+	$table->addRowStrings("Spanning row", true);
+	$table->addHeaderStrings("Part 1", true, 0);
+	$table->addAttribute("border", "2");	
+	$table->addHeaderStrings("Part 2", true, 4);
 	
+	
+	
+		
 ?>
 
 <html>
@@ -54,6 +60,9 @@
 	</head>
 	
 	<body>
-		<?php echo $form; ?>
+		<?php
+			echo $table . "<br />";
+			echo $form;
+		?>
 	</body>
 </html>

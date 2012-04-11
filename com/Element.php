@@ -7,13 +7,15 @@
  * them. This class serves as a base class for any object that represents an HTML tag.
  * @package com
  * @author Kevork Sepetci 
+ * @todo implement ArrayAcces
  * @todo throw exception if trying to set innerHTML when tag is inline.
  * @todo add xpath (see SimpleXMLElement)
  * @todo customizeable settings for markup (tag names all caps, )
  * @todo add static method to generate Element from SimpleXMLElement
  * @todo warn if id is set through setAttribute()
+ * @todo have render indent properly. (right # of tabs)
  */
-class Element implements Iterator{
+class Element implements Iterator, ArrayAccess{
 	
 	/**
 	 * The tag name of this Element (HTML ex: table for <table></table>)
@@ -202,10 +204,18 @@ class Element implements Iterator{
 	}
 	
 	/**
-	 * Append a child Element Object to this Element object
+	 * Append a child Element Object to this Element object, or as the $ith child where $i is given as the paramter
+	 * @param Element $child the child Element to append
+	 * @param int $index (Optional) The index to place the child element at (0 is first row after header). The element is placed at the end by default.
+	 * @return int new number of child Elements
 	 */
-	public function appendChild(Element $child){
-		$this->children[] = $child;
+	public function appendChild(Element $child, $index=-1){
+		if($index != -1){
+			array_splice($this->children, $index, 0, array($child));
+		}else{
+			$this->children[] = $child;
+		}
+		return count($this->children);
 	}
 	
 	/**
@@ -236,7 +246,7 @@ class Element implements Iterator{
 	public function removeChild($index){
 		if(isset($this->children[$index])){
 			$child = $this->children[$index];
-			unset($this->children[$index]);
+			array_splice($this->children, $index, 1);
 			return $child;
 		}
 		return false;
@@ -267,12 +277,12 @@ class Element implements Iterator{
 			$id = (!empty($this->id)) ? "id= \" {$this->id}\" " : "";
 			$html = "<{$this->tagName} $id";
 			$html .= $this->arrayToAttributesString($this->attributes);
-			$html .= ">\n";
+			$html .= ">";
 			if(!empty($this->innerHTML)){
 				$html .= "{$this->innerHTML}\n";
 			}
 			foreach($this->children as $child){
-				$html .= "\t" . $child . "\n";
+				$html .= "\n\t" . $child;
 			}
 			$html .= "</{$this->tagName}>";
 			return $html;
@@ -299,8 +309,31 @@ class Element implements Iterator{
 		}
 		return $html;
 	}
+
+/*
+ * ArrayAccess methods here...
+ */
+	public function offsetExists($offset){
+		return isset($this->children[$offset]);
+	}
 	
-	/*
+	public function offsetGet($offset){
+		return $this->children[$offset];
+	}
+	
+	public function offsetSet($offset, $value){
+		if(!($value instanceof Element)){
+			//throw exception
+			return false;
+		}
+		$this->children[$offset] = $value;
+	}
+	
+	public function offsetUnset($offset){
+		unset($this->children[$offset]);
+	}
+ 	
+/*
  * Iterator methods here...
  */
 	public function current(){
