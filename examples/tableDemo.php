@@ -1,29 +1,7 @@
 <?php
- 
-//	header("Content-Type: text/plain");
- 	ini_set("display_errors", 1);
 
- 	
-	require_once("../com/com.inc.php");
-	
-	//Form Example
-	$form = new Form();
-	$form->addField(new Checkbox("Online Only", "Online Only", false));
-	$form->addField(new File("Your file: ", ""));
-	$form->addField(new Hidden("this is hidden", "name", "id"));
-	$form->addField(new Radio("MPA", "MPA", false, "program"));
-	$form->addField(new Radio("MSW", "MSW", false, "program"));
-	$form->addField(new Radio("CDS", "CDS", false, "program"));
-	$form->addField(new Radio("IEP", "IEP", false, "program"));
-	$form->addField(new Text("Your text here please ", ""));
-	$form->addField(new TextArea("Comments", ""));
-	$form->addField(new Select("Pick your favorite color", array("", "Red", "Green", "Blue")));
-	$form->addField(new Reset("Reset NOW", false, "program"));
-	$form->addField(new Submit("Submit"));
-	$form->addField(new Submit("Preview"));
-
-	$form->loadSubmittedValues();
-	
+ 	require_once("../com/com.inc.php");
+	require_once("../../mysql.inc");
 	
 	//Element DOM Navigation
 	$div = new Element("div");
@@ -35,12 +13,10 @@
 			$child->setIsInline(true);
 		}
 	}
-	//echo $div;
-
 
 	//Table Example
 	$table = new Table(5, array("Head1", "Head2", "Head3", "Head4", "Head5"));
-	$table->addRowStrings(array("a1", "b1", "c1", "d1", "e1"));
+	$table->addRowStrings(array("a1", "b1", "c1", "d1", ""));
 	$table->addRowStrings(array("a2", "b2", "c2", "d2", "e2"));
 	$table->addRowStrings(array("a3", "b3", "c3", "d3", "e3"));
 	$table->addRowStrings(array("a4", "b4", "c4", "d4", "e4"));
@@ -49,8 +25,16 @@
 	$table->addAttribute("border", "2");	
 	$table->addHeaderStrings("Part 2", true, 4);
 	
-	
-	
+	//Table from MySQL Results
+	$result = mysql_query("SELECT CONCAT(Dept, ' ', Number) AS Class, Instructor FROM SOLARClasses WHERE Dept = 'ECE' AND Term = 2125");
+	$table2 = Table::createFromMySQLResult($result, null, null);
+	$i = 0;
+	foreach($table2 as $row){
+		if($i % 2 == 0){
+			$row->addAttribute("style", "background-color: #ddd;");
+		}
+		$i++;
+	}
 		
 ?>
 
@@ -61,7 +45,9 @@
 	
 	<body>
 		<?php
+			echo $div . "<br />";
 			echo $table . "<br />";
+			echo $table2 . "<br />";
 			echo $form;
 		?>
 	</body>

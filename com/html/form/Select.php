@@ -1,7 +1,9 @@
 <?php
 /**
  * Encapsulates an HTML select field.
- * @package com.form.html
+ * @package com.html.form
+ * @author Kevork Sepetci
+ * 
  * @todo clearOptions($values[]) function
  * @todo clearOption($value) function
  * @todo options():Element[] function

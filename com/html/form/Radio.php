@@ -1,17 +1,18 @@
 <?php
 /**
- * Encapsulates a Checkbox form input field.
- * @package com.form.html
+ * Encapsulates a Radio buttom form input field.
+ * @package com.html.form
+ * @author Kevork Sepetci
  */
-class Checkbox extends AbstractInput{
+class Radio extends AbstractInput{
 	
 	/**
-	 * A boolean value indicating if this checkbox is checked by default.
+	 * A boolean value indicating if this radio button is checked by default.
 	 */
 	private $checked;
 	
 	/**
-	 * Constructor: Create an instance of a checkbox form input field.
+	 * Constructor: Create an instance of a radio button form input field.
  	 * @param string $labelString The label of the input field. Appears in <label> tags.
 	 * @param string $value The value attribute of the input field
 	 * @param boolean $checked (Optional) Default checked/unchecked state of checkbox (true = checked). Normally unchecked
@@ -21,7 +22,7 @@ class Checkbox extends AbstractInput{
 	public function __construct($labelString, $value, $checked=false, $name=null, $id=null){
 		$this->setIsInline(true);
 		$this->setTagName("input");
-		$this->setAttribute("type", "checkbox");
+		$this->setAttribute("type", "radio");
 		$this->checked = $checked;
 		parent::__construct($labelString, $value, $name, $id);
 	}
@@ -43,19 +44,6 @@ class Checkbox extends AbstractInput{
 		$previous = $this->isChecked();
 		$this->checked = $checked;
 		return $previous;
-	}
-	
-	/**
-	 * Prints the markup for this input. Has alias __toString()
-	 * @return string A string representation of this input. ie. The XML
-	 */
-	public function render(){
-		if($this->checked){
-			$this->setAttribute("checked", "checked");
-		}
-		$input = parent::render();
-//		$label = ($this->getPrintLabel() == true) ? $this->getLabelElement() : "";
-		return $input;
 	}
 
 }

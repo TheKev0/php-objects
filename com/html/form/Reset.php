@@ -1,7 +1,8 @@
 <?php
 /**
  * Encapsulates a reset button for a form.
- * @package com.form.html
+ * @package com.html.form
+ * @author Kevork Sepetci
  */
 class Reset extends AbstractInput{
 	

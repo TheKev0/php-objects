@@ -1,7 +1,8 @@
 <?php
 /**
  * Encapsulates a submit button in a form.
- * @package com.form.html
+ * @package com.html.form
+ * @author Kevork Sepetci
  */
 class Submit extends AbstractInput{
 	

@@ -1,7 +1,8 @@
 <?php
 /**
  * Encapsulates a text box (<textarea>) in a form.
- * @package com.form.html
+ * @package com.html.form
+ * @author Kevork Sepetci
  */
 class TextArea extends AbstractInput{
 	

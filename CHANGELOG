@@ -12,3 +12,6 @@ Element: can add child at any index
 Element: bugfix in removeChild()
 Element: implements ArrayAccess
 com.html.Table first working state with documentation
+
+05/01/12
+com.html.Table has createFromMySQLResult()

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This class encapsulates a simple html table. The number of columns is fixed at 
  * initialization but rows can be added and removed. There are methods to manipulate the 
@@ -24,6 +23,8 @@
  * @author Kevork Sepetci
  * @package com.html
  * 
+ * @todo addHeaderElement()
+ * @todo addRowElement()
  * @todo add static method createFromMySQLResult();
  * @todo Exception Handling
  */
@@ -98,6 +99,60 @@ class Table extends Element{
 		}
 		$this->appendChild($rowElement, $index);
 		return count($this->children);
+	}
+	
+	/**
+	 * Add a header row to the body of the table. This function does not set the main table header.
+	 * @param array $row An array of strings to go into each cell of the header. If the span parameter is set to true, this shuold a string.
+	 * @param boolean $span (Optional) If true the row will have one cell that spans the length of the table. ($row must have one element)
+	 * @param int $index (Optional) The index of the table where the row should be added. 0 is the first row of the table excluding the main header.
+	 * @return int the new number of rows in the table
+	 * @todo IllegalArgumentException when inconsistent arguments are given
+	 */
+	public function addHeaderStrings($row, $span=false, $index=-1){
+		if((is_array($row) && count($row) != $this->cols) || ($span && !is_string($row))){
+			//throw IllegalArgumentException
+			return false;
+		}
+		$index = ($index == null) ? $this->rows : $index;
+		$rowElement = new Element("tr");
+		if($span === true){
+			$rowElement->appendChild(new Element("th", $row, "", array("colspan"=>$this->cols)));
+		}else{
+			$rowKeys = array_keys($row);
+			for($i = 0; $i < $this->cols; $i++){
+				$cellContents = (isset($rowKeys[$i])) ? $row[$rowKeys[$i]] : "";
+				$cell = new Element("th", $cellContents);
+				$rowElement->appendChild($cell);
+			}
+		}
+		$this->appendChild($rowElement, $index);
+		return count($this->children);
+	}
+	
+	/**
+	 * Set the main header row of the table. This function sets only the main table header at the top of the table.
+	 * @param array $row An array of strings to go into each cell of the header. If the span parameter is set to true, this shuold a string.
+	 * @param boolean $span (Optional) If true the row will have one cell that spans the length of the table. ($row must have one element)
+	 * @todo IllegalArgumentException when inconsistent arguments are given
+	 */
+	public function setMainHeaderStrings($row, $span=false){
+		if((is_array($row) && count($row) != $this->cols) || ($span && !is_string($row))){
+			//throw IllegalArgumentException
+			return false;
+		}
+		$rowElement = new Element("tr");
+		if($span === true){
+			$rowElement->appendChild(new Element("th", $row, "", array("colspan"=>$this->cols)));
+		}else{
+			$rowKeys = array_keys($row);
+			for($i = 0; $i < $this->cols; $i++){
+				$cellContents = (isset($rowKeys[$i])) ? $row[$rowKeys[$i]] : "";
+				$cell = new Element("th", $cellContents);
+				$rowElement->appendChild($cell);
+			}
+		}
+		$this->header = $rowElement;
 	}
 		
 	/*
@@ -187,35 +242,6 @@ class Table extends Element{
 	}
 	
 	/**
-	 * Add a header row to the body of the table. This function does not set the main table header.
-	 * @param array $row An array of strings to go into each cell of the header. If the span parameter is set to true, this shuold a string.
-	 * @param boolean $span (Optional) If true the row will have one cell that spans the length of the table. ($row must have one element)
-	 * @param int $index (Optional) The index of the table where the row should be added. 0 is the first row of the table excluding the main header.
-	 * @return int the new number of rows in the table
-	 * @todo IllegalArgumentException when inconsistent arguments are given
-	 */
-	public function addHeaderStrings($row, $span=false, $index=-1){
-		if((is_array($row) && count($row) != $this->cols) || ($span && !is_string($row))){
-			//throw IllegalArgumentException
-			return false;
-		}
-		$index = ($index == null) ? $this->rows : $index;
-		$rowElement = new Element("tr");
-		if($span === true){
-			$rowElement->appendChild(new Element("th", $row, "", array("colspan"=>$this->cols)));
-		}else{
-			$rowKeys = array_keys($row);
-			for($i = 0; $i < $this->cols; $i++){
-				$cellContents = (isset($rowKeys[$i])) ? $row[$rowKeys[$i]] : "";
-				$cell = new Element("th", $cellContents);
-				$rowElement->appendChild($cell);
-			}
-		}
-		$this->appendChild($rowElement, $index);
-		return count($this->children);
-	}
-	
-	/**
 	 * Remove a row at index $index from the table.
 	 * @param int $index The index of the row to remove
 	 * @return Element|boolean the removed Element or false if offset $index doesn't exist
@@ -241,6 +267,54 @@ class Table extends Element{
 		$string = parent::render();
 		$this->removeChild(0);
 		return $string;
+	}
+	
+	/**
+	 * This static method returns an instance of a Table object given a mysql result resource.
+	 * @param resource $result A mysql result resource
+	 * @param array $header (Optional) A string array containing the headers of the table. Defaults to the column names in the SQL SELECT clause in the same order.
+	 * @param array $columns (Optional) A string array of the column names from the SQL SELECT clause to be printed. Order of the columns is relevant. Invalid column names are ignored. Defaults to all of the columns in the SQL SELECT clause in the same order.
+	 * @param int $numRows (Optional) The maximum number of rows to print in the table. Defaults to printing all of the rows in the mysql result resource.
+	 * @return Table a table object containing data from the MySQL result resource
+	 * @todo throw IllegalArgumentException where necessary.
+	 */
+	public static function createFromMySQLResult($result, $header=null, $columns=null, $numRows=-1){
+		if(!is_resource($result)){
+			//throw IllegalArgumentException
+			return false;
+		}
+		$numCols = mysql_num_fields($result);
+		$table = new Table($numCols);
+		$rowCount = 0;
+		$numRows = ($numRows == -1) ? PHP_INT_MAX : $numRows;
+		if($columns == null){	//Print all columns in order of select clause
+			while(($row = mysql_fetch_assoc($result)) != false && $rowCount < $numRows){
+				$table->addRowStrings($row);
+				$rowCount++;
+			}
+			if($header == null){//Set default main header
+				$header = array();
+				for($i = 0; $i < $numCols; $i++){
+					$header[] = mysql_fetch_field($result, $i)->name;
+				}
+			}
+		}else{					//Print only desired columns in desired order
+			while(($row = mysql_fetch_assoc($result)) != false && $rowCount < $numRows){
+				$customRow = array();
+				for($i = 0; $i < count($columns); $i++){
+					if(isset($row[$columns[$i]])){
+						$customRow[] = $row[$columns[$i]];
+					}
+				}
+				$table->addRowStrings($customRow);
+				$rowCount++;
+			}
+			if($header == null){//Set default main header
+				$header = $columns;	
+			}
+		}
+		$table->setMainHeaderStrings($header);
+		return $table;
 	}
 }
 

@@ -1,7 +1,8 @@
 <?php
 /**
  * Encapsulates a file upload form input field.
- * @package com.form.html
+ * @package com.html.form
+ * @author Kevork Sepetci
  */
 class File extends AbstractInput{	
 	

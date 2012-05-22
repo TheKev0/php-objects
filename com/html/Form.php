@@ -1,7 +1,9 @@
 <?php
 /**
  * This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.
- * @package com.form
+ * @package com.html
+ * @author Kevork Sepetci
+ * 
  * @todo if no submit button, add a hidden input field to act as a submit.
  * @todo method to get submit fields directly
  * @todo make POST and GET class constants
@@ -132,6 +134,25 @@ class Form extends Element implements Iterator, ArrayAccess{
 		}
 		return false;
 	}
+	
+	/**
+	 * Get the action used by this form. (The URL it submits to.)
+	 * @return string the action used by this form
+	 */
+	 public function getAction(){
+	 	return $this->action;
+	 }
+	 
+	 /**
+	 * Set the action used by this form. (The URL it submits to.)
+	 * @return string the previous action (URL or path) of this form.
+	 * @param string $action the path or URL that the form should submit to
+	 */
+	 public function setAction($action){
+	 	$previous = $this->action;
+		$this->action = $action;
+	 	return $previous;
+	 }
 	
 	/**
 	 * Get the HTTP method used by this form.
@@ -331,8 +352,9 @@ class Form extends Element implements Iterator, ArrayAccess{
 		if($this->printFields){
 			foreach($this->fields as $key => $field){
 				if($printKevStyle){
+					$this->addAttribute("style", "line-height: 2em;");
 					$field->setPrintLabel(false);
-					$inner .= "<span class= \"label\">" . $field->getLabelElement() . "</span>";
+					$inner .= "<span class= \"label\" style= \"width: 250px;display: inline-block;text-align: right;margin-right: 10px;vertical-align: top;\">" . $field->getLabelElement() . "</span>";
 					$inner .= "<span>$field</span><br />\n";
 				}else{
 					$inner .= "\t" . $field->render() . $breakString;

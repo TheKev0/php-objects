@@ -1,7 +1,9 @@
 <?php
 /**
  * This is an abstract subclass of Element that encapsulates an HTML or XForm input field. This class does not pertain specifically to HTML, XForms, etc. It is meant to be general and specific types of input fields are defined as children of this object.
- * @package com.form
+ * @package com.html.form
+ * @author Kevork Sepetci
+ *
  * @todo append default id of each field with _<field type>
  * @todo prefix default id and names with something to identify my library
  * @todo Add methods addStyleRule, setStyleRule
@@ -166,6 +168,19 @@ abstract class AbstractInput extends Element{
 		$label = ($this->getPrintLabel() == true) ? $this->getLabelElement() : "";
 		return $label . $input;
 	}
-
+	
+/*	public function serialize(){
+		if(is_object($this)){
+			$objAsArray = (array) $this;
+			foreach($objAsArray as $key => $value){
+				serialize($value);
+			}
+			
+		}else{
+			
+		}
+	}
+*/
 }
+
 ?>

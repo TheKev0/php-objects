@@ -7,8 +7,8 @@
  * them. This class serves as a base class for any object that represents an HTML tag.
  * @package com
  * @author Kevork Sepetci 
- * @todo implement ArrayAcces
  * @todo throw exception if trying to set innerHTML when tag is inline.
+ * @todo add support for adding inline style rules
  * @todo add xpath (see SimpleXMLElement)
  * @todo customizeable settings for markup (tag names all caps, )
  * @todo add static method to generate Element from SimpleXMLElement
@@ -309,7 +309,7 @@ class Element implements Iterator, ArrayAccess{
 		}
 		return $html;
 	}
-
+	
 /*
  * ArrayAccess methods here...
  */
