@@ -10,19 +10,19 @@
 	//Package: com
 	require_once("Element.php");
 
-	require_once("form/AbstractInput.php");
-	require_once("form/Form.php");
+	require_once("html/form/AbstractInput.php");
+	require_once("html/Form.php");
 	
 	
-	require_once("form/html/Text.php");
-	require_once("form/html/Select.php");
-	require_once("form/html/TextArea.php");
-	require_once("form/html/File.php");
-	require_once("form/html/Radio.php");
-	require_once("form/html/Checkbox.php");
-	require_once("form/html/Submit.php");
-	require_once("form/html/Reset.php");
-	require_once("form/html/Hidden.php");
+	require_once("html/form/Text.php");
+	require_once("html/form/Select.php");
+	require_once("html/form/TextArea.php");
+	require_once("html/form/File.php");
+	require_once("html/form/Radio.php");
+	require_once("html/form/Checkbox.php");
+	require_once("html/form/Submit.php");
+	require_once("html/form/Reset.php");
+	require_once("html/form/Hidden.php");
 	
 
 	require_once("html/Table.php");
