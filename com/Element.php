@@ -8,7 +8,6 @@
  * @package com
  * @author Kevork Sepetci 
  * @todo throw exception if trying to set innerHTML when tag is inline.
- * @todo add support for adding inline style rules
  * @todo add xpath (see SimpleXMLElement)
  * @todo customizeable settings for markup (tag names all caps, )
  * @todo add static method to generate Element from SimpleXMLElement
@@ -22,11 +21,6 @@ class Element implements Iterator, ArrayAccess{
 	 */
 	protected $tagName = "";
 
-	/**
-	 * The id attribute of this Element
-	 */
-	protected $id;
-	
 	/**
 	 * The inner content of this Element.
 	 * @todo Add support for children Element objects
@@ -55,34 +49,12 @@ class Element implements Iterator, ArrayAccess{
 	 * Construct an Element object.
 	 * @param string $tagName The tag name of this tag. Cannot be an empty string
 	 * @param string $innerHTML Optional: The inner HTML of this Element
-	 * @param string $id Optional: The id attribute of this Element
 	 * @param array $attributes Optional: an associative array of attributes for this Element
 	 */
-	public function __construct($tagName, $innerHTML = "", $id = "", $attributes = array()){
+	public function __construct($tagName, $innerHTML = "", $attributes = array()){
 		$this->tagName = $tagName;
 		$this->innerHTML = $innerHTML;
-		$this->id = $id;
 		$this->attributes = $attributes;
-	}
-	
-	/**
-	 * Get the id attribute of this Element.
-	 * @return string id of the input field
-	 */
-	public function getID(){
-		return $this->id;
-	}
-	
-	/**
-	 * Set the id attribute of this Element.
-	 * @param string $id id attribute of Element
-	 * @return the old id
-	 */
-	public function setID($id){
-		$previous = $this->getID();
-		$this->id = $id;
-		$this->setAttribute("id", $id);
-		return $previous;
 	}
 	
 	/**
@@ -273,9 +245,9 @@ class Element implements Iterator, ArrayAccess{
 	 * @return string A string representation of this Element. ie. The XML
 	 */
 	public function render(){
+		$html = "";
 		if($this->getIsInline() === false){
-			$id = (!empty($this->id)) ? "id= \" {$this->id}\" " : "";
-			$html = "<{$this->tagName} $id";
+			$html = "<{$this->tagName} ";
 			$html .= $this->arrayToAttributesString($this->attributes);
 			$html .= ">";
 			if(!empty($this->innerHTML)){
@@ -285,14 +257,12 @@ class Element implements Iterator, ArrayAccess{
 				$html .= "\n\t" . $child;
 			}
 			$html .= "</{$this->tagName}>";
-			return $html;
 		}else{
-		$id = (!empty($this->id)) ? "id= \"{$this->id}\" " : "";
-		$html = "<{$this->tagName} $id";
-		$html .= $this->arrayToAttributesString($this->attributes);
-		$html .= "/>";
-		return $html;
+			$html = "<{$this->tagName} ";
+			$html .= $this->arrayToAttributesString($this->attributes);
+			$html .= "/>";
 		}
+		return $html;
 	}
 	
 	/**
@@ -301,6 +271,9 @@ class Element implements Iterator, ArrayAccess{
 	 * @return string returns the String representation of the associative array.
 	 */
 	protected static function arrayToAttributesString($array){
+		if(empty($array) || is_null($array)){
+			return "";
+		}
 		$html = "";
 		$keys = array_keys($array);
 		foreach($keys as $key){		//add other attributes

@@ -15,3 +15,13 @@ com.html.Table first working state with documentation
 
 05/01/12
 com.html.Table has createFromMySQLResult()
+
+05/23/12
+Changed package structure so that subclasses of Abstract input are in package com.html.form
+instead of com.form.html.
+
+05/24/12
+Introduced a new object HTMLElement, a subclass of Element.
+Moved support for id attribute from Element to HTMLElement
+Form, Table, AbstractInput now extend HTMLElement
+Added inline style funtionality to HTMLElemnt.

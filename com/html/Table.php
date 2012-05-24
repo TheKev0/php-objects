@@ -28,7 +28,7 @@
  * @todo add static method createFromMySQLResult();
  * @todo Exception Handling
  */
-class Table extends Element{
+class Table extends HTMLElement{
 
 	/**
 	 * The number of columns in the table

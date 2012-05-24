@@ -6,10 +6,10 @@
  *
  * @todo append default id of each field with _<field type>
  * @todo prefix default id and names with something to identify my library
- * @todo Add methods addStyleRule, setStyleRule
+ * @todo Add methods addStyleRule, getStyleRule, getStyleRules
  * @todo warn if name, id, or value are set via addAttribute.
  */
-abstract class AbstractInput extends Element{
+abstract class AbstractInput extends HTMLElement{
 
 	/**
 	 * Name attribute of the input field.
@@ -36,10 +36,12 @@ abstract class AbstractInput extends Element{
 	 */
 	protected $printLabel = true;
 	
+	
 	/**
 	 * Use as a default, internally generated name, id, etc. (auto-incremented)
 	 */
 	protected static $identifier = 0;
+	
 	
 	/**
 	 * Constructor to set the instance variables. Since this is an abstract class the constructor is never used explicitly. Only the child classes use this constructor.
@@ -58,7 +60,7 @@ abstract class AbstractInput extends Element{
 			$this->id = ($id == null) ? $labelString : $id;
 		}
 		$this->setName($this->name);
-		$this->setLabelElement(new Element("label", $labelString, "", array("for" => $this->name)));
+		$this->setLabelElement(new HTMLElement("label", $labelString, "", array("for" => $this->name)));
 		AbstractInput::$identifier++;
 	}
 	
@@ -95,7 +97,7 @@ abstract class AbstractInput extends Element{
 	 * @param Element $label label
 	 * @return Element returns the old label Element
 	 */
-	public function setLabelElement(Element $label){
+	public function setLabelElement(HTMLElement $label){
 		$oldLabel = $this->label;
 		$this->label = $label;
 		return $oldLabel;
@@ -168,19 +170,6 @@ abstract class AbstractInput extends Element{
 		$label = ($this->getPrintLabel() == true) ? $this->getLabelElement() : "";
 		return $label . $input;
 	}
-	
-/*	public function serialize(){
-		if(is_object($this)){
-			$objAsArray = (array) $this;
-			foreach($objAsArray as $key => $value){
-				serialize($value);
-			}
-			
-		}else{
-			
-		}
-	}
-*/
 }
 
 ?>

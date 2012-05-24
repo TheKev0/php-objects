@@ -9,6 +9,7 @@
 
 	//Package: com
 	require_once("Element.php");
+	require_once("html/HTMLElement.php");
 
 	require_once("html/form/AbstractInput.php");
 	require_once("html/Form.php");

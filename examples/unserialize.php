@@ -27,8 +27,9 @@
 		foreach($submittedValues as $name => &$value){
 			$value = htmlentities($value);
 			if(empty($value)){
-				$form[$name]->getLabelElement()->addAttribute("style", "color: #f40808; font-weight: bold;");
-				$form[$name]->addAttribute("style", "border: 2px inset #f40808; background-color: #ffefa4;");
+				$form[$name]->getLabelElement()->setStyleRule("color", "#f40808");	//make labels red
+				$form[$name]->getLabelElement()->setStyleRule("font-weight", "bold");
+				$form[$name]->addStyleString("border: 2px inset #f40808; background-color: #ffefa4;");
 				$haveErrors = true;
 			}
 		}
@@ -69,6 +70,7 @@
 					{$form["Street Address"]->getLabelElement()}	{$form["Street Address"]} <br />
 					{$form["City"]->getLabelElement()}	{$form["City"]}, &nbsp {$form["State"]} <br />
 				</form>
+			
 END;
 			
 			echo "<br /><br /><br />";

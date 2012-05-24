@@ -14,7 +14,7 @@
  * @todo revise to work with Element's DOM navigation if necessary
  * @todo warn if enctype, method, or action are set via addtAttributes()
  */
-class Form extends Element implements Iterator, ArrayAccess{
+class Form extends HTMLElement implements Iterator, ArrayAccess{
 	
 	/**
 	 * Stores the input fields as an array of AbstractInput objects.
@@ -352,7 +352,7 @@ class Form extends Element implements Iterator, ArrayAccess{
 		if($this->printFields){
 			foreach($this->fields as $key => $field){
 				if($printKevStyle){
-					$this->addAttribute("style", "line-height: 2em;");
+					$this->setStyleRule("line-height", "2em;");
 					$field->setPrintLabel(false);
 					$inner .= "<span class= \"label\" style= \"width: 250px;display: inline-block;text-align: right;margin-right: 10px;vertical-align: top;\">" . $field->getLabelElement() . "</span>";
 					$inner .= "<span>$field</span><br />\n";
