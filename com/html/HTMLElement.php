@@ -2,7 +2,7 @@
 /**
  * Encapsulates an html tag. The constructor assumes a non-inline element 
  * (a table tag is non-inline, an img tag is inline). This can be set explicityly using 
- * setIsInline(). InnerHTML cannot be set after an Element has been set to be inline. This
+ * setIsInline(). innerText cannot be set after an Element has been set to be inline. This
  * class also stores child nodes and has simple functions to add/remove/iterate through 
  * them. This class serves as a base class for any object that represents an HTML tag.
  * @package com.html
@@ -25,13 +25,13 @@ class HTMLElement extends Element{
 	/**
 	 * Construct an HTMLElement object.
 	 * @param string $tagName The tag name of this tag. Cannot be an empty string
-	 * @param string $innerHTML Optional: The inner HTML of this Element
+	 * @param string $innerText Optional: The inner HTML of this Element
 	 * @param string $id Optional: The id attribute of this Element
 	 * @param array $attributes Optional: an associative array of attributes for this Element
 	 */
-	public function __construct($tagName, $innerHTML = "", $id = "", $attributes = array()){
+	public function __construct($tagName, $innerText = "", $id = "", $attributes = array()){
 		$this->id = $id;
-		parent::__construct($tagName, $innerHTML, $attributes);
+		parent::__construct($tagName, $innerText, $attributes);
 	}
 	
 	/**

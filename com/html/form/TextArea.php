@@ -25,7 +25,7 @@ class TextArea extends AbstractInput{
 	 */
 	public function render(){
 		$this->clearAttribute("value");
-		$this->setInnerHTML($this->getValue());
+		$this->setInnerText($this->getValue());
 		$input = parent::render();
 		return $input;
 	}

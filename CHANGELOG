@@ -25,3 +25,4 @@ Introduced a new object HTMLElement, a subclass of Element.
 Moved support for id attribute from Element to HTMLElement
 Form, Table, AbstractInput now extend HTMLElement
 Added inline style funtionality to HTMLElemnt.
+Renamed Element::innerHTML to Element::innerText

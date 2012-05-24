@@ -108,7 +108,7 @@ abstract class AbstractInput extends HTMLElement{
 	 * @return string label of the input field
 	 */
 	public function getLabelString(){
-		return $this->label->getInnerHTML();
+		return $this->label->getInnerText();
 	}
 	
 	/**
@@ -118,7 +118,7 @@ abstract class AbstractInput extends HTMLElement{
 	 */
 	public function setLabelString($label){
 		$oldLabel = $this->getLabelString();
-		$this->label->setInnerHTML($label);
+		$this->label->setInnerText($label);
 		return $oldLabel;
 	}
 	

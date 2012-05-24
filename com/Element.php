@@ -2,12 +2,12 @@
 /**
  * Encapsulates xml or html tag. The constructor assumes a non-inline element 
  * (table instead of img tags) This can be set explicityly using 
- * setIsInline(). InnerHTML cannot be set after an Element has been set to be inline. This
+ * setIsInline(). innerText cannot be set after an Element has been set to be inline. This
  * class also stores child nodes and has simple functions to add/remove/iterate through 
  * them. This class serves as a base class for any object that represents an HTML tag.
  * @package com
  * @author Kevork Sepetci 
- * @todo throw exception if trying to set innerHTML when tag is inline.
+ * @todo throw exception if trying to set innerText when tag is inline.
  * @todo add xpath (see SimpleXMLElement)
  * @todo customizeable settings for markup (tag names all caps, )
  * @todo add static method to generate Element from SimpleXMLElement
@@ -23,10 +23,8 @@ class Element implements Iterator, ArrayAccess{
 
 	/**
 	 * The inner content of this Element.
-	 * @todo Add support for children Element objects
-	 * @todo Change name to something general
 	 */
-	protected $innerHTML = "";
+	protected $innerText = "";
 	
 	/**
 	 * An associative array of attributes for this Element.
@@ -48,12 +46,12 @@ class Element implements Iterator, ArrayAccess{
 	/**
 	 * Construct an Element object.
 	 * @param string $tagName The tag name of this tag. Cannot be an empty string
-	 * @param string $innerHTML Optional: The inner HTML of this Element
+	 * @param string $innerText Optional: The inner HTML of this Element
 	 * @param array $attributes Optional: an associative array of attributes for this Element
 	 */
-	public function __construct($tagName, $innerHTML = "", $attributes = array()){
+	public function __construct($tagName, $innerText = "", $attributes = array()){
 		$this->tagName = $tagName;
-		$this->innerHTML = $innerHTML;
+		$this->innerText = $innerText;
 		$this->attributes = $attributes;
 	}
 	
@@ -75,20 +73,21 @@ class Element implements Iterator, ArrayAccess{
 	}
 	
 	/**
-	 * Get the inner HTML of this Element.
-	 * @return string the inner HTML of this Element
+	 * Get the inner text of this Element.
+	 * @return string the inner text of this Element
 	 */
-	public function getInnerHTML(){
-		return $this->innerHTML;
+	public function getInnerText(){
+		return $this->innerText;
 	}
 	
 	/**
-	 * Set the inner HTML of this Element.
-	 * @param string $innerHTML the inner HTML of this Element
+	 * Set the inner text of this Element.
+	 * @param string $innerText the inner text of this Element
+	 * @return string the previous inner text
 	 */
-	public function setInnerHTML($innerHTML){
-		$inner = $this->getInnerHTML();
-		$this->innerHTML = $innerHTML;
+	public function setInnerText($innerText){
+		$inner = $this->getInnerText();
+		$this->innerText = $innerText;
 		return $inner;
 	}
 	
@@ -250,8 +249,8 @@ class Element implements Iterator, ArrayAccess{
 			$html = "<{$this->tagName} ";
 			$html .= $this->arrayToAttributesString($this->attributes);
 			$html .= ">";
-			if(!empty($this->innerHTML)){
-				$html .= "{$this->innerHTML}\n";
+			if(!empty($this->innerText)){
+				$html .= "{$this->innerText}\n";
 			}
 			foreach($this->children as $child){
 				$html .= "\n\t" . $child;

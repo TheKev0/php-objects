@@ -360,7 +360,7 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 					$inner .= "\t" . $field->render() . $breakString;
 				}
 			}
-			$this->setInnerHTML($inner);
+			$this->setInnerText($inner);
 		}
 		return parent::render();
 	}

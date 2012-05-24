@@ -96,7 +96,7 @@ class Select extends AbstractInput{
 			foreach($options as $key => $optionText){
 				$opt = new Element("option");
 				$opt->setAttribute("value", $key);
-				$opt->setInnerHTML($optionText);
+				$opt->setInnerText($optionText);
 				$this->options[$key] = $opt;
 			}
 		}
@@ -113,7 +113,7 @@ class Select extends AbstractInput{
 			foreach($options as $key => $optionText){
 				$opt = new Element("option");
 				$opt->setAttribute("value", $optionText);
-				$opt->setInnerHTML($optionText);
+				$opt->setInnerText($optionText);
 				$this->options[$optionText] = $opt;
 			}
 		}
@@ -128,7 +128,7 @@ class Select extends AbstractInput{
 		$option = new Element("option");
 		$value = (empty($value)) ? $label : $value;
 		$option->setAttribute("value", $value);
-		$option->setInnerHTML($label);
+		$option->setInnerText($label);
 		$this->options[] = $option;
 	}
 	
@@ -145,7 +145,7 @@ class Select extends AbstractInput{
 			}
 			$inner .= "\t" . $option->render() . "\n";
 		}
-		$this->setInnerHTML($inner);
+		$this->setInnerText($inner);
 		return parent::render();
 	}
 }

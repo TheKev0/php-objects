@@ -14,11 +14,11 @@
  * Element object of the row or cell. Index 0 is the first row of the table excluding the
  * main header.
  * 
- * ex: $rowElement = $table[4]; 		//returns a 'tr' Element object at row 5
+ * ex: <code>$rowElement = $table[4]; 		//returns a 'tr' Element object at row 5</code>
  * 
- * ex: $cellElement = $table[4][3]		//returns a 'td' Element object at row 5 col 4
+ * ex: <code>$cellElement = $table[4][3]		//returns a 'td' Element object at row 5 col 4</code>
  * 
- * ex: $cellElement  = $table[4][3]->getInnerHTML();	//returns a string of the contents in row 5 col 4
+ * ex: <code>$cellElement  = $table[4][3]->getInnerText();	//returns a string of the contents in row 5 col 4</code>
  * 
  * @author Kevork Sepetci
  * @package com.html
@@ -207,7 +207,7 @@ class Table extends HTMLElement{
 		$strings  = array();
 		if($this->header !== false){
 			foreach($this->header as $header){
-				$strings[] = $header->getInnerHTML();
+				$strings[] = $header->getInnerText();
 			}
 			return $strings;
 		}
@@ -234,7 +234,7 @@ class Table extends HTMLElement{
 		if(isset($this->children[$index])){
 			$strings = array();
 			foreach($this->children[$index] as $child){
-				$strings[] = $child->getInnerHTML();
+				$strings[] = $child->getInnerText();
 			}
 			return $strings;
 		}
