@@ -47,18 +47,29 @@ abstract class AbstractInput extends HTMLElement{
 	 * Constructor to set the instance variables. Since this is an abstract class the constructor is never used explicitly. Only the child classes use this constructor.
 	 * @param string $label The label of the input field. Appears in <label> tags.
 	 * @param string $value The value attribute of the input field
-	 * @param string $name (Optional) The name attribute of the input field. Defaults to same as label.
+	 * @param string $name (Optional) The name attribute of the input field. Defaults to same as label. If label is an empty string a unique number is used as the name.
 	 * @param string $id (Optional) The id attribute of the input field. Defaults to same as label.
 	 */
 	public function __construct($labelString, $value, $name=null, $id=null){
 		$this->setValue($value);
-		if(empty($labelString)){
-			$this->name = ($name == null) ? AbstractInput::$identifier : ($name);
-			$this->id = ($id == null) ? AbstractInput::$identifier : $id;
+		if($name == null){
+			$this->name = (!empty($labelString)) ? $labelString : AbstractInput::$identifier;
 		}else{
-			$this->name = ($name == null) ? $labelString : ($name);
-			$this->id = ($id == null) ? $labelString : $id;
+			$this->name = $name;
 		}
+		if($id == null){
+			$this->id = (!empty($labelString)) ? $labelString : AbstractInput::$identifier;
+		}else{
+			$this->id = $id;
+		}
+		//Old way to resolve an empty name field
+		//if(empty($labelString)){
+		//	$this->name = ($name == null) ? AbstractInput::$identifier : ($name);
+		//	$this->id = ($id == null) ? AbstractInput::$identifier : $id;
+		//}else{
+		//	$this->name = ($name == null) ? $labelString : ($name);
+		//	$this->id = ($id == null) ? $labelString : $id;
+		//}
 		$this->setName($this->name);
 		$this->setLabelElement(new HTMLElement("label", $labelString, "", array("for" => $this->name)));
 		AbstractInput::$identifier++;

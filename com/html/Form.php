@@ -1,16 +1,21 @@
 <?php
 /**
- * This class encapsulates a form. It is an iterable collection of AbstractInput objects. It allows easily adding/removing and looping through form fields. When a form field is added it is indexed is by default the label. If the provided label is blank an internally generated index is returned which can be used to retrieve the form input field.
+ * This class encapsulates a form. It is an iterable collection of AbstractInput objects. 
+ * It allows easily adding/removing and looping through form fields. When a form field is 
+ * added it is indexed by it's name attribute. Note that an AbstractInput object uses the 
+ * label as the name attribute if no name is provided, or generates a unique index for the
+ * name if the label is an empty string. So if no name attribute is defined on an input field before 
+ * it's added to the form, it is, in effect, indexed by it's label.
+ * 
  * @package com.html
  * @author Kevork Sepetci
  * 
- * @todo if no submit button, add a hidden input field to act as a submit.
- * @todo method to get submit fields directly
- * @todo make POST and GET class constants
+ * @todo method to get submit types directly
+ * @todo make POST and GET class constants (maybe)
  * @todo add support for fieldsets
  * @todo add support for default tab indexing
- * @todo add support for different render formats
- * @todo warn if enctype is not multipart/form-data and there is a file field.
+ * @todo add support for different render formats (currently has just "Kev style")
+ * @todo warn if enctype is not multipart/form-data and there is a file field. (And use states to set this attribute.)
  * @todo revise to work with Element's DOM navigation if necessary
  * @todo warn if enctype, method, or action are set via addtAttributes()
  */
@@ -80,57 +85,81 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 	}
 	
 	/**
-	 * Add a form field to the form. The form object uniquely identifies each form field by it's label. (@see Form::getName()) If the label string is blank, then the name attribute is used. If a file upload field is added the enctype attribute is automatically set to "multipart/form-data" unless a call to setEnctype() has already been made.
+	 * Add a form field to the form. The form object uniquely identifies each form field by it's name attribute. (see Form->getName()) Note that if no name attribute is set on an AbstractInput object the label is used as the name. Thus if you add an input field that does not have a name attribute it will, in effect, be tracked by the label. Additionally, this function returns the index the Form is using track the input field. If a file upload field is added the enctype attribute is automatically set to "multipart/form-data" unless a call to setEnctype() has already been made. Finally, when Radio buttons with the same name are added to the form, a call to getField($name) will return an associative array of radio buttons with the same name. (see getField())
 	 * @param AbstractInput $field the input field to add
 	 * @return string the string the form uses to uniquely identify the form field. Can be passed to getField() to retrieve the form field.
 	 * @see getField()
 	 */
 	public function addField(AbstractInput $field){
-		$index = $field->getLabelString();
-		if(empty($index) || $index == null){
-			$index = $field->getName();
-		}
-		$this->fields[$index] = $field;
-		if($field instanceof File && !$this->setEnctypeCalled){
-			$this->setEnctype("multipart/form-data");
+		//The Form used to track fields by Label. Now it tracks by name. See docblock.
+		//$index = $field->getLabelString();
+		//if(empty($index) || $index == null){
+		//	$index = $field->getName();
+		//}
+		$index = $field->getName();
+		if($field instanceof Radio){
+			if(!isset($this->fields[$index])){
+				$this->fields[$index] = array();
+			}
+			$this->fields[$index][$field->getValue()] = $field;
+		}else{
+			$this->fields[$index] = $field;
+			if($field instanceof File && !$this->setEnctypeCalled){
+				$this->setEnctype("multipart/form-data");
+			}
 		}
 		return $index;
 	}
 	
 	/**
-	 * Check of a field with label $labelString exists.
-	 * @param string $labelString label to to check. Can also be a value returned by addField()
+	 * Check if a field with the given name attribute exists. Since forms often have many radio buttons with the same name, if there are ANY radio buttons with the $name provided this function will return true and false otherwise.
+	 * @param string $name name attribute of field to get. Can also be a value returned by addField().
 	 * @return boolean true if the field is in this form and false otherwise.
 	 */
-	public function fieldExists($labelString){
-		$alreadyExists = array_key_exists($labelString, $this->fields);
+	public function fieldExists($name){
+		$alreadyExists = array_key_exists($name, $this->fields);
 		return $alreadyExists;
 	}
 	
 	/**
-	 * Retrieve a form field using the label string or index returned by addField()
-	 * @param string $labelString either the label string or index returned by addField()
-	 * @return AbstractInput|boolean the form field or false if it is not present
+	 * Retrieve a form field using it's name attribute or the value returned by addField().
+	 * @param string $name the name attribute of the needed field or a value returned by addField()
+	 * @return AbstractInput|boolean|array the form field or false if it is not present. If the desired field is a radio button an associative array of radio buttons with the provided $name is returned, indexed by the radio buttons' value attribute. To retrieve a single radio button the following syntax may be used <code>$form["name"]["value"]</code>
 	 * @see getField()
 	 */
-	public function getField($labelString){
-		if($this->fieldExists($labelString)){
-			return $this->fields[$labelString];
+	public function getField($name){
+		if($this->fieldExists($name)){
+			return $this->fields[$name];
 		}
 		return false;
 	}
 	
 	/**
-	 * Removes a form field using the label string or index returned by addField()
-	 * @param string $labelString either the label string or index returned by addField()
+	 * Removes a form field using the name attribute or a value returned by addField(). WARNING: As there are often many radio buttons with the same name attribute, passing the name of a radio button will remove ALL radio buttons with the given name! To remove a single radio button use removeRadioButton().
+	 * @param string $name the name attribute of the field to remove or a value returned by addField()
 	 * @return AbstractInput|boolean the removed form field or false if it does not exist
 	 * @see getField()
 	 */
-	public function removeField($labelString){
-		if($this->fieldExists($labelString)){
-			$field = $this->fields[$labelString];
-			unset($this->fields[$labelString]);
+	public function removeField($name){
+		if($this->fieldExists($name)){
+			$field = $this->fields[$name];
+			unset($this->fields[$name]);
 			return $field;
+		}
+		return false;
+	}
+	
+	/**
+	 * Removes a single radio button from the Form. Since using removeField($name) removes all radio buttons with the given name, this function is used to remove only a single radio button.
+	 * @param string $name the name attribute of the radio button to be removed
+	 * @param string $value the value attribute of the radio button to be removed
+	 * @return Radio|false the removed Radio button or false if it was not present
+	 */
+	public function removeRadioButton($name, $value){
+		$radioButton = $this->fields[$name][$value];
+		if($radioButton != null){
+			unset($this->fields[$name][$value]);
+			return $radioButton;
 		}
 		return false;
 	}
@@ -345,19 +374,31 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 	 * @param string $breakString (Optional) The string to use as a line break between form elements. Defaults to "\n<br />"
 	 * @return string A string representation of this form. ie. The HTML
 	 */
-	public function render($printKevStyle=true, $breakString= "\n<br />"){
-		
+	public function render($printKevStyle=true, $breakString= "\n<br />"){		
 		$this->addAttribute("enctype", $this->enctype);
 		$inner = "\n";
 		if($this->printFields){
 			foreach($this->fields as $key => $field){
-				if($printKevStyle){
-					$this->setStyleRule("line-height", "2em;");
-					$field->setPrintLabel(false);
-					$inner .= "<span class= \"label\" style= \"width: 250px;display: inline-block;text-align: right;margin-right: 10px;vertical-align: top;\">" . $field->getLabelElement() . "</span>";
-					$inner .= "<span>$field</span><br />\n";
+				if(is_array($field)){	//this means we have a whole bunch of radio buttons w/ the same name attribute
+					foreach($field as $value => $Element){
+						if($printKevStyle){
+							$this->setStyleRule("line-height", "2em;");
+							$Element->setPrintLabel(false);
+							$inner .= "<span class= \"label\" style= \"width: 250px;display: inline-block;text-align: right;margin-right: 10px;vertical-align: top;\">" . $Element->getLabelElement() . "</span>";
+							$inner .= "<span>$Element</span><br />\n";
+						}else{
+							$inner .= "\t" . $field->render() . $breakString;
+						}
+					}
 				}else{
-					$inner .= "\t" . $field->render() . $breakString;
+					if($printKevStyle){
+						$this->setStyleRule("line-height", "2em;");
+						$field->setPrintLabel(false);
+						$inner .= "<span class= \"label\" style= \"width: 250px;display: inline-block;text-align: right;margin-right: 10px;vertical-align: top;\">" . $field->getLabelElement() . "</span>";
+						$inner .= "<span>$field</span><br />\n";
+					}else{
+						$inner .= "\t" . $field->render() . $breakString;
+					}
 				}
 			}
 			$this->setInnerText($inner);

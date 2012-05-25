@@ -26,3 +26,8 @@ Moved support for id attribute from Element to HTMLElement
 Form, Table, AbstractInput now extend HTMLElement
 Added inline style funtionality to HTMLElemnt.
 Renamed Element::innerHTML to Element::innerText
+
+05/25/12
+Changed Form to index by name instead of label
+Radio buttons in Form are now indexed by name then by value. Radio buttons with the same names are now grouped as an array within Form::fields.
+Added Form->removeRadioButton($name, $value)

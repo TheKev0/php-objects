@@ -17,8 +17,8 @@
 	
 	//Initialize form
 	$form = new Form();
-	$form->addField(new Checkbox("Online Only", "Online Only", false));
-	$form->addField(new File("Your file: ", ""));
+	$form->addField(new Checkbox("Online Only", "Online Only", false, "onlineOnly"));
+	$form->addField(new File("Your file: ", "", "file"));
 	$form->addField(new Hidden("this is hidden", "name", "id"));
 	$form->addField(new Radio("MPA", "MPA", false, "program"));	//name ('program')must match for radio buttons
 	$form->addField(new Radio("MSW", "MSW", false, "program"));
@@ -33,6 +33,7 @@
 	
 	//load submitted values
 	$form->loadSubmittedValues();
+	
 
 
 ?>
@@ -45,7 +46,7 @@
 	<body>
 		<h1>Example Form</h1>
 		<?php
-			echo $form;
+			echo $form;		//equivalent to $form->render();
 		?>
 	</body>
 </html>
