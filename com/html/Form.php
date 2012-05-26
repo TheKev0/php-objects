@@ -260,16 +260,20 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 		$submittedFieldValue = false;
 		if($this->method == "POST"){
 			foreach($submitFieldKeys as $key){
-				$submitButtonName = $this->fields[$key]->getName();
-				if(isset($_POST[$submitButtonName])){
-					$submittedFieldValue = $_POST[$submitButtonName];  
+				if(!is_array($this->fields[$key])){
+					$submitButtonName = $this->fields[$key]->getName();
+					if(isset($_POST[$submitButtonName])){
+						$submittedFieldValue = $_POST[$submitButtonName];  
+					}
 				}
 			}
 		}elseif($this->method == "GET"){
 			foreach($submitFieldKeys as $key){
-				$submitButtonName = $this->fields[$key]->getName();
-				if(isset($_GET[$submitButtonName])){
-					$submittedFieldValue = $_GET[$submitButtonName];  
+				if(!is_array($this->fields[$key])){
+					$submitButtonName = $this->fields[$key]->getName();
+					if(isset($_GET[$submitButtonName])){
+						$submittedFieldValue = $_GET[$submitButtonName];  
+					}
 				}
 			}
 		}
@@ -295,18 +299,23 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 		$returnValues = array();
 		$globalArray = ($this->getMethod() == "POST") ? $_POST : $_GET;
 		foreach($this->fields as $key => $field){
-			$fieldName = $field->getName();
-			$fieldName = $this->replaceSpaces($fieldName);		//Browsers replace spaces with underscoers.
-			if($field instanceof Checkbox && $formatNicely){
-				$returnValues[$key] = (isset($globalArray[$fieldName])) ? true : false;
-			}elseif($field instanceof File){
-				$returnValues[$key] = (empty($_FILES[$fieldName]["tmp_name"])) ? false : $_FILES[$fieldName];
-			}elseif($field instanceof Radio){
-				$returnValues[$fieldName] = (isset($globalArray[$fieldName])) ? $globalArray[$fieldName] : false;
-			}
-			else{
-				if(isset($globalArray[$fieldName])){
-					$returnValues[$key] = $globalArray[$fieldName];
+			if(is_array($field)){	//Instead of an input field we have an aray of radio buttons with the same name attribute
+				foreach($field as $radioBtn){
+					$nameAttr = $radioBtn->getName();
+					break;
+				}
+				$returnValues[$nameAttr] = (isset($globalArray[$nameAttr])) ? $globalArray[$nameAttr] : false;
+			}else{
+				$fieldName = $field->getName();
+				$fieldName = $this->replaceSpaces($fieldName);		//Browsers replace spaces with underscoers.
+				if($field instanceof Checkbox && $formatNicely){
+					$returnValues[$key] = (isset($globalArray[$fieldName])) ? true : false;
+				}elseif($field instanceof File){
+					$returnValues[$key] = (empty($_FILES[$fieldName]["tmp_name"])) ? false : $_FILES[$fieldName];
+				}else{
+					if(isset($globalArray[$fieldName])){
+						$returnValues[$key] = $globalArray[$fieldName];
+					}
 				}
 			}
 		}
@@ -326,21 +335,29 @@ class Form extends HTMLElement implements Iterator, ArrayAccess{
 		
 		$globalArray = ($this->getMethod() == "POST") ? $_POST : $_GET;
 		foreach($this->fields as $key => $field){
-			$fieldName = $field->getName();
-			$fieldName = $this->replaceSpaces($fieldName);		//Browsers replace spaces with underscoers.
-			if($field instanceof Checkbox){
-				$wasChecked = (isset($globalArray[$fieldName])) ? true : false;
-				$this->fields[$key]->setChecked($wasChecked);
-			}elseif($field instanceof Radio){
-				if(isset($globalArray[$fieldName]) && $field->getValue() == $globalArray[$fieldName]){
-					$field->setAttribute("checked", "checked");
+			if(is_array($field)){	//Instead of an input field we have an aray of radio buttons with the same name attribute
+				foreach($field as $radioBtn){
+					$nameAttr = $radioBtn->getName();
+					$valueAttr = $radioBtn->getValue();
+					$fieldName = $this->replaceSpaces($nameAttr);		//Browsers replace spaces with underscoers in the name attribute.
+					if(isset($globalArray[$fieldName]) && $radioBtn->getValue() == $globalArray[$fieldName]){
+						$radioBtn->setAttribute("checked", "checked");
+						break;
+					}
 				}
-			}elseif($field instanceof Select){
-				if(isset($globalArray[$fieldName])){
-					$field->setSelected($globalArray[$fieldName]);
+			}else{
+				$fieldName = $field->getName();
+				$fieldName = $this->replaceSpaces($fieldName);		//Browsers replace spaces with underscoers in the name attribute.
+				if($field instanceof Checkbox){
+					$wasChecked = (isset($globalArray[$fieldName])) ? true : false;
+					$this->fields[$key]->setChecked($wasChecked);
+				}elseif($field instanceof Select){
+					if(isset($globalArray[$fieldName])){
+						$field->setSelected($globalArray[$fieldName]);
+					}
+				}elseif(!($field instanceof File || $field instanceof Submit) && isset($globalArray[$fieldName])){
+					$field->setValue($globalArray[$fieldName]);
 				}
-			}elseif(!($field instanceof File || $field instanceof Submit) && isset($globalArray[$fieldName])){
-				$field->setValue($globalArray[$fieldName]);
 			}
 		}
 	}
