@@ -71,7 +71,7 @@ abstract class AbstractInput extends HTMLElement{
 		//	$this->id = ($id == null) ? $labelString : $id;
 		//}
 		$this->setName($this->name);
-		$this->setLabelElement(new HTMLElement("label", $labelString, "", array("for" => $this->name)));
+		$this->setLabelElement(new HTMLElement("label", $labelString, "", array("for" => $this->id)));
 		AbstractInput::$identifier++;
 	}
 	
@@ -177,9 +177,9 @@ abstract class AbstractInput extends HTMLElement{
 	 * @return string A string representation of this input. ie. The XML
 	 */
 	public function render(){
-		$input = parent::render();
+		$input = parent::render();	//render the input field
 		$label = ($this->getPrintLabel() == true) ? $this->getLabelElement() : "";
-		return $label . $input;
+		return $label . $input;	//concatenation implicitly calls render on $label
 	}
 }
 

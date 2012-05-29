@@ -12,7 +12,7 @@
 	require_once("html/HTMLElement.php");
 
 	require_once("html/form/AbstractInput.php");
-	require_once("html/Form.php");
+	require_once("html/form/Form.php");
 	
 	
 	require_once("html/form/Text.php");
